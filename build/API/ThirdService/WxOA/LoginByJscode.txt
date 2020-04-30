@@ -1,0 +1,13 @@
+
+URL: API\ThirdService\WxOA\LoginByJscode
+
+API\ThirdService\WxOA\LoginByJscodeRequest {
+  jscode : string @Required;
+}
+
+API\ThirdService\WxOA\LoginByJscodeResponse {
+  errMsg : string @Optional;
+  uid : string @Optional;
+  token : string @Required;
+  code : int @Required;
+}

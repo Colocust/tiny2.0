@@ -1,0 +1,14 @@
+
+URL: API\ThirdService\LoginByGuest
+
+API\ThirdService\LoginByGuestRequest {
+  uuid : int[] @Optional;
+  devinfo : string @Optional;
+}
+
+API\ThirdService\LoginByGuestResponse {
+  errMsg : string @Optional;
+  uid : string @Optional;
+  token : string @Required;
+  code : int @Required;
+}

@@ -1,0 +1,12 @@
+
+URL: API\TinyLogin
+
+API\TinyLoginRequest {
+  telephone : string @Required;
+}
+
+API\TinyLoginResponse {
+  uid : string @Optional;
+  token : string @Required;
+  code : int @Required;
+}

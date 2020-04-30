@@ -1,0 +1,13 @@
+
+URL: API\ThirdService\WxApp\LoginByJscode
+
+API\ThirdService\WxApp\LoginByJscodeRequest {
+  jscode : string @Required;
+}
+
+API\ThirdService\WxApp\LoginByJscodeResponse {
+  errMsg : string @Optional;
+  uid : string @Optional;
+  token : string @Required;
+  code : int @Required;
+}

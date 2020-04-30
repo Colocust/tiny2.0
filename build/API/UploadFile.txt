@@ -1,0 +1,19 @@
+
+URL: API\UploadFile
+
+API\UploadFileRequest {
+  file : UploadFileRequestItem @Required;
+}
+
+API\UploadFileResponse {
+  url : string @Optional;
+  code : int @Required;
+}
+
+API\UploadFileRequestItem {
+  name : string @Required;
+  type : string @Required;
+  tmp_name : string @Required;
+  error : int @Required;
+  size : int @Required;
+}
