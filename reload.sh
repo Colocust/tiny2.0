@@ -1,5 +1,7 @@
 #!/bin/bash
-echo "loading..."
+php Integrator.php
+echo "inte"
+
 pid=`pidof HTTP_SERVER`
 echo $pid
 kill -USR1 $pid

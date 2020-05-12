@@ -10,7 +10,7 @@ class Config {
   public $timeout = 100;
   public $dbNo = 1;
 
-  public function __construct(string $host, string $port, int $timeout, int $dbNo) {
+  public function __construct(string $host, int $port, int $timeout, int $dbNo) {
     $this->host = $host;
     $this->port = $port;
     $this->dbNo = $dbNo;
