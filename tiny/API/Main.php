@@ -45,18 +45,24 @@ class Main {
         $api->process($request, $response);
       } while (false);
 
-    } catch (\Exception $e) {
-      $response->httpStatus = $e->getCode();
-      Logger::getInstance()->fatal($e->getMessage(), $e);
+    } catch (\Exception $exception) {
+      $response->httpStatus = $exception->getCode();
+      Logger::getInstance()->fatal($exception->getMessage(), $exception);
+    } catch (\Error $error) {
+      $response->httpStatus = HttpStatus::FAILED;
+      Logger::getInstance()->fatal($error->getMessage(), $error);
     }
-
-    Logger::getInstance()->info('end');
 
     foreach ($response->httpHeaders as $header => $value) {
       $httpResponse->header($header, $value);
     }
 
     $httpResponse->status($response->httpStatus);
+
+    if ($response->httpStatus != HttpStatus::SUC) {
+      $response->data = null;
+    }
     $httpResponse->end($response->data);
+    Logger::getInstance()->info('end');
   }
 }

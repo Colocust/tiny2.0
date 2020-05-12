@@ -21,15 +21,15 @@ class Test extends JsonAPI {
     $request = TestRequest::fromAPI($this);
     $response = new TestResponse();
 
-//    go(function () {
-//      sleep(5);
-//      echo Time::getCurrentMillSecondToString() . 'co' . PHP_EOL;
-//    });
+    go(function () {
+      sleep(5);
+      echo Time::getCurrentMillSecondToString() . 'co' . PHP_EOL;
+    });
 
     return $response;
   }
 
   protected function needToken(): bool {
-    return false;
+    return true;
   }
 }

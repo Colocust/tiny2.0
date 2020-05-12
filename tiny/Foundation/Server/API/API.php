@@ -26,12 +26,24 @@ abstract class API extends \Tiny\API {
   private $parseStrategy_;
 
   protected function go(\Tiny\API\Request $request, \Tiny\API\Response $response) {
+    $requestData = $this->getRequestClass();
+
+    $converter = new Converter();
+    $converter->convert($request->data, $requestData);
+    $this->request_ = $requestData;
+
+
     if ($this->needToken() && !$this->authToken($request)) {
       @$response->data->code = Code::TOKEN_EXPIRE_CODE;
       Logger::getInstance()->warn('token not set or error');
       return;
     }
     $this->response_ = $this->run();
+
+    $response->data = $this->getResponseClass();
+
+    $converter = new Converter();
+    $converter->convert($this->response_, $response->data);
   }
 
   protected function parseRequest(\Tiny\API\Request $request, \Tiny\API\Response $response): bool {
@@ -51,20 +63,10 @@ abstract class API extends \Tiny\API {
     $request->token = @$request->data->token;
     unset($request->data->token);
 
-    $requestData = $this->getRequestClass();
-
-    $converter = new Converter();
-    $converter->convert($request->data, $requestData);
-    $this->request_ = $requestData;
     return true;
   }
 
   protected function parseResponse(\Tiny\API\Request $request, \Tiny\API\Response $response): void {
-    $response->data = $this->getResponseClass();
-
-    $converter = new Converter();
-    $converter->convert($this->response_, $response->data);
-
     $response->data = $this->parseStrategy_->encode($response->data);
 
     if ($response->data === false) {

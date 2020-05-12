@@ -9,6 +9,7 @@ use Tiny\Foundation\Server\Login\LoginAPIResponse;
 class TestLoginResponse extends LoginAPIResponse {
   /**
    * @var int
+   * @uses \Tiny\Annotation\Uses\Optional
    */
   public $result;
 }

@@ -91,7 +91,7 @@ class NetDB extends Redis {
     $netId = self::NET . $this->net;
 
     $value = $this->db->get($netId);
-    $this->value = json_encode($value);
+    $this->value = json_decode($value);
     return;
   }
 
