@@ -41,6 +41,7 @@ class Server {
 
     $this->server->on('WorkerStart', function ($server, $worker_id) {
       include_once __ROOT__ . '/tiny/Loader/Loader.php';
+      include_once __ROOT__ . '/Config.php';
       Loader::register();
     });
 
