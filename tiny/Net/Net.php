@@ -37,7 +37,7 @@ class Net {
   final static public function createByOwner($owner, int $ttl, bool $isSupportMultiClient): self {
     $netId = self::newId($owner);
     $netDb = new NetDB($netId);
-    if ($isSupportMultiClient) {
+    if (!$isSupportMultiClient) {
       NetDB::delAllByOwner($owner);
     }
     $netDb->createNet($owner, $ttl);
