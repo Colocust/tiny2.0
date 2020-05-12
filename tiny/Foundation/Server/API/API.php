@@ -4,13 +4,11 @@
 namespace Tiny\Foundation\Server;
 
 
-use Tiny\Annotation\ClassAnnotation;
 use Tiny\API\HttpStatus;
-use Tiny\Exception\APIException;
+use Tiny\Converter;
 use Tiny\Logger;
 use Tiny\Net;
 use Tiny\Serialize\SerializeStrategy;
-use Tiny\Validate;
 
 abstract class API extends \Tiny\API {
 
@@ -18,10 +16,9 @@ abstract class API extends \Tiny\API {
    * @var $net_ Net
    */
   private $net_;
-  /**
-   * @var $request_ Request
-   */
+
   private $request_;
+  private $response_;
 
   /**
    * @var $parseStrategy_ SerializeStrategy
@@ -34,11 +31,10 @@ abstract class API extends \Tiny\API {
       Logger::getInstance()->warn('token not set or error');
       return;
     }
-    $this->request_ = $request->data;
-    $response->data = $this->run();
+    $this->response_ = $this->run();
   }
 
-  protected function parseRequestParameter(\Tiny\API\Request $request, \Tiny\API\Response $response): bool {
+  protected function parseRequest(\Tiny\API\Request $request, \Tiny\API\Response $response): bool {
     if (empty($request->data)) {
       $request->data = new \stdClass();
       return true;
@@ -55,17 +51,19 @@ abstract class API extends \Tiny\API {
     $request->token = @$request->data->token;
     unset($request->data->token);
 
-    Validate::check($request->data, $this->getRequestClass());
+    $requestData = $this->getRequestClass();
 
+    $converter = new Converter();
+    $converter->convert($request->data, $requestData);
+    $this->request_ = $requestData;
     return true;
   }
 
-  protected function parseResponseParameter(\Tiny\API\Request $request, \Tiny\API\Response $response): void {
-    Validate::check($response->data, $this->getResponseClass());
+  protected function parseResponse(\Tiny\API\Request $request, \Tiny\API\Response $response): void {
+    $response->data = $this->getResponseClass();
 
-    if (empty($response->data)) {
-      return;
-    }
+    $converter = new Converter();
+    $converter->convert($this->response_, $response->data);
 
     $response->data = $this->parseStrategy_->encode($response->data);
 
@@ -114,23 +112,8 @@ abstract class API extends \Tiny\API {
   }
 
   public function getResponseClass(): Response {
-    $requestClass = $this->requestClass();
-    $requestClassName = get_class($requestClass);
-
-    $pos = strrpos($requestClassName, 'Request');
-    if (!$pos) {
-      $errMsg = get_class($this) . "不能通过Request类找到指定的Response类";
-      throw new APIException($errMsg);
-    }
-
-    $responseClassName = substr($requestClassName, 0, $pos) . 'Response';
-
-    $classInstance = new ClassAnnotation($responseClassName);
-    /**
-     * @var $responseClass Response
-     */
-    $responseClass = $classInstance->getClassInstanceWithoutConstruct();
-    return $responseClass;
+    $responseClassName = get_class($this->response_);
+    return new $responseClassName;
   }
 
 }

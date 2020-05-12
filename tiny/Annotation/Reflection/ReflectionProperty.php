@@ -1,12 +1,11 @@
 <?php declare(strict_types=1);
 
 
-namespace Tiny\Annotator\Annotator;
+namespace Tiny\Annotation\Reflection;
 
-use Tiny\Annotation\ClassAnnotation;
+
 use Tiny\Annotation\Type;
 use Tiny\Annotation\Uses;
-use Tiny\Exception\PropertyNotFoundException;
 
 /**
  *
@@ -15,19 +14,14 @@ use Tiny\Exception\PropertyNotFoundException;
  * 可获取指定类中成员属性的类型以及使用情况的信息
  *
  */
-class PropertyAnnotation {
+class ReflectionProperty {
 
   private $propertyDoc_ = null;
   private $instance_;
   private $className_;
   private $propertyName_;
 
-  /**
-   * PropertyAnnotation constructor.
-   * @param string $className
-   * @param $propertyName
-   * @throws \ReflectionException
-   */
+
   public function __construct(string $className, $propertyName) {
     $this->instance_ = new \ReflectionProperty($className, $propertyName);
     $this->propertyDoc_ = $this->instance_->getDocComment();
@@ -52,10 +46,7 @@ class PropertyAnnotation {
     return $type;
   }
 
-  /**
-   * @return Uses|null
-   * @throws \Tiny\Exception\ClassNotFoundException
-   */
+
   public function getUses(): ?Uses {
     if (!$this->propertyDoc_) {
       return null;
@@ -69,7 +60,7 @@ class PropertyAnnotation {
       return null;
     }
     $uses = trim($matches[2]);
-    $classAnnotator = new ClassAnnotation($uses);
+    $classAnnotator = new ReflectionClass($uses);
     if (!$classAnnotator->isSubClassOf('\Tiny\Annotation\Uses')) {
       return null;
     }

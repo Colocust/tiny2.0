@@ -9,16 +9,16 @@ use Tiny\API\Response;
 abstract class API {
 
   public function process(Request $request, Response $response) {
-    if ($this->parseRequestParameter($request, $response)) {
+    if ($this->parseRequest($request, $response)) {
       $this->go($request, $response);
-      $this->parseResponseParameter($request, $response);
+      $this->parseResponse($request, $response);
     }
   }
 
   abstract protected function go(Request $request, Response $response);
 
-  abstract protected function parseRequestParameter(Request $request, Response $response): bool;
+  abstract protected function parseRequest(Request $request, Response $response): bool;
 
-  abstract protected function parseResponseParameter(Request $request, Response $response): void;
+  abstract protected function parseResponse(Request $request, Response $response): void;
 
 }

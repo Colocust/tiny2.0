@@ -1,10 +1,8 @@
 <?php declare(strict_types=1);
 
 
-namespace Tiny\Annotation;
+namespace Tiny\Annotation\Reflection;
 
-
-use Tiny\Exception\ClassNotFoundException;
 
 /**
  *
@@ -17,21 +15,14 @@ use Tiny\Exception\ClassNotFoundException;
  *
  *
  */
-class ClassAnnotation {
+class ReflectionClass {
 
   private $className_;
   private $instance_;
 
-
   public function __construct(string $className) {
     $this->className_ = $className;
-
-    try {
-      $this->instance_ = new \ReflectionClass($this->className_);
-    } catch (\ReflectionException $e) {
-      throw new ClassNotFoundException($this->className_);
-    }
-
+    $this->instance_ = new \ReflectionClass($this->className_);
   }
 
   public function getInstance(): \ReflectionClass {
@@ -56,17 +47,6 @@ class ClassAnnotation {
 
   public function isSubClassOf(string $parentClassName): bool {
     return $this->instance_->isSubclassOf($parentClassName);
-  }
-
-  public function getProperties(): ?array {
-    $properties = $this->instance_->getProperties();
-    foreach ($properties as $property) {
-      $propertyName[] = $property->getName();
-    }
-    if (!isset($propertyName)) {
-      return null;
-    }
-    return $propertyName;
   }
 
   public function isAbstract(): bool {

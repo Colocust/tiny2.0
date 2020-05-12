@@ -2,11 +2,13 @@
 
 namespace Tiny;
 
-use Tiny\Annotator\Annotator\FileAnnotation;
+
+use Tiny\Annotation\Reflection\ReflectionFile;
 
 require_once "tiny/Helper/Time.php";
 require_once "tiny/Loader/Loader.php";
-require_once "tiny/Annotation/Annotation/FileAnnotation.php";
+require_once "tiny/Annotation/Reflection/ReflectionFile.php";
+
 Loader::register();
 
 define('__ROOT__', __DIR__);
@@ -79,7 +81,7 @@ EOF;
       return;
     }
 
-    $fileInstance = new FileAnnotation($fileDir);
+    $fileInstance = new ReflectionFile($fileDir);
     $namespace = $fileInstance->getNamespace();
     $class = $fileInstance->getClass();
 

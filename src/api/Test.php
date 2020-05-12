@@ -19,13 +19,12 @@ class Test extends JsonAPI {
 
   protected function run(): Response {
     $request = TestRequest::fromAPI($this);
-    Logger::getInstance()->info(json_encode($request));
     $response = new TestResponse();
 
-    go(function () {
-      sleep(5);
-      echo Time::getCurrentMillSecondToString() . 'co' . PHP_EOL;
-    });
+//    go(function () {
+//      sleep(5);
+//      echo Time::getCurrentMillSecondToString() . 'co' . PHP_EOL;
+//    });
 
     return $response;
   }

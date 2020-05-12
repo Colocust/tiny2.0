@@ -9,6 +9,4 @@ interface Uses {
   function isRequired(): bool;
 
   function isOptional(): bool;
-
-  function getName(): string;
 }

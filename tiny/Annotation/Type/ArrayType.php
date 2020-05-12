@@ -23,6 +23,10 @@ class ArrayType extends Type {
     return $this->elementType_;
   }
 
+  public function getElementTypeName(): string {
+    return $this->typeName_;
+  }
+
 
   public function getTypeName(): string {
     return $this->typeName_ . '[]';

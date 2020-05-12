@@ -15,8 +15,4 @@ class Required implements Uses {
   function isOptional(): bool {
     return false;
   }
-
-  function getName(): string {
-    return 'Required';
-  }
 }

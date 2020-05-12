@@ -1,10 +1,8 @@
 <?php declare(strict_types=1);
 
 
-namespace Tiny\Annotator\Annotator;
+namespace Tiny\Annotation\Reflection;
 
-
-use Tiny\Exception\FileNotFoundException;
 
 /**
  *
@@ -17,13 +15,13 @@ use Tiny\Exception\FileNotFoundException;
  * 此处代码不严谨 需要改善
  *
  */
-class FileAnnotation {
+class ReflectionFile {
 
   private $content_;
 
   public function __construct(string $dir) {
     if (!is_file($dir)) {
-      throw new FileNotFoundException($dir);
+      throw new \Exception($dir . 'not found');
     }
     $this->content_ = file_get_contents($dir);
   }
