@@ -8,6 +8,7 @@ use Tiny\Foundation\Server\JsonAPI;
 use Tiny\Foundation\Server\Request;
 use Tiny\Foundation\Server\Response;
 use Tiny\Helper\Time;
+use Tiny\Logger;
 
 
 class Test extends JsonAPI {
@@ -17,6 +18,8 @@ class Test extends JsonAPI {
   }
 
   protected function run(): Response {
+    $request = TestRequest::fromAPI($this);
+    Logger::getInstance()->info(json_encode($request));
     $response = new TestResponse();
 
     go(function () {
@@ -28,6 +31,6 @@ class Test extends JsonAPI {
   }
 
   protected function needToken(): bool {
-    return true;
+    return false;
   }
 }

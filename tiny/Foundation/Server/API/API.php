@@ -18,6 +18,10 @@ abstract class API extends \Tiny\API {
    * @var $net_ Net
    */
   private $net_;
+  /**
+   * @var $request_ Request
+   */
+  private $request_;
 
   /**
    * @var $parseStrategy_ SerializeStrategy
@@ -30,6 +34,7 @@ abstract class API extends \Tiny\API {
       Logger::getInstance()->warn('token not set or error');
       return;
     }
+    $this->request_ = $request->data;
     $response->data = $this->run();
   }
 
@@ -98,6 +103,10 @@ abstract class API extends \Tiny\API {
 
   final protected function getNet(): Net {
     return $this->net_;
+  }
+
+  final public function getRequest(): Request {
+    return $this->request_;
   }
 
   public function getRequestClass(): Request {

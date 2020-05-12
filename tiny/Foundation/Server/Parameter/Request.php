@@ -5,5 +5,7 @@ namespace Tiny\Foundation\Server;
 
 
 class Request {
-
+  public static function fromAPI(API $api): Request {
+    return $api->getRequest();
+  }
 }
