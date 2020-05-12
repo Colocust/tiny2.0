@@ -25,7 +25,7 @@ define('EXT', 'php');
  */
 class Integrator {
   private static $classMaps = [];
-  private static $filterDirectory = ['.', '..', '.idea'];
+  private static $filterDirectory = ['.', '..', '.idea','Config.php'];
 
   public function go() {
     //第一步 扫描所有文件 生成文件与类的对应关系

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="97eea35c-b950-4e1b-8572-17c938ae5d3e" name="Default Changelist" comment="" />
+    <list default="true" id="97eea35c-b950-4e1b-8572-17c938ae5d3e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,9 +14,12 @@
       <executable />
     </execution>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
   <component name="ProjectId" id="1bZGrUqOpTpe7DrmSP9UcuC01Vw" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -31,18 +36,18 @@
     <property name="settings.editor.selected.configurable" value="fileTemplates" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\framework" />
+      <recent name="C:\wamp64\www\framework\tiny\Foundation\src\Server" />
+      <recent name="C:\wamp64\www\framework\tiny\Server\src" />
+      <recent name="C:\wamp64\www\framework\tiny\Server" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\framework" />
       <recent name="C:\wamp64\www\framework\tiny\Validate" />
       <recent name="C:\wamp64\www\framework\tiny\Task" />
       <recent name="C:\wamp64\www\framework\tiny\Serialize" />
       <recent name="C:\wamp64\www\framework\tiny\Redis" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\framework" />
-      <recent name="C:\wamp64\www\framework\tiny\Foundation\src\Server" />
-      <recent name="C:\wamp64\www\framework\tiny\Server\src" />
-      <recent name="C:\wamp64\www\framework\tiny\Server" />
     </key>
   </component>
   <component name="SvnConfiguration">
@@ -67,7 +72,7 @@
       <workItem from="1589165889653" duration="66000" />
       <workItem from="1589183240121" duration="11980000" />
       <workItem from="1589247976569" duration="14000" />
-      <workItem from="1589252661944" duration="1271000" />
+      <workItem from="1589252661944" duration="5539000" />
     </task>
     <servers />
   </component>
@@ -85,9 +90,10 @@
     </state>
     <state x="523" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1589013409743" />
     <state x="523" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1589080573829" />
-    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1589098775458">
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1589255453450">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1589255453450" />
     <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1589098775458" />
     <state x="499" y="167" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1589202015765">
       <screen x="0" y="0" width="1536" height="824" />
@@ -99,10 +105,10 @@
     </state>
     <state x="695" y="258" key="NewPhpClassDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1589190282255" />
     <state x="695" y="258" key="NewPhpClassDialog/0.0.1536.824@0.0.1536.824" timestamp="1589198541829" />
-    <state x="626" y="348" key="NewPhpFileDialog" timestamp="1589008434672">
+    <state x="626" y="348" key="NewPhpFileDialog" timestamp="1589257297036">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="626" y="348" key="NewPhpFileDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1589008434672" />
+    <state x="626" y="348" key="NewPhpFileDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1589257297036" />
     <state x="626" y="348" key="NewPhpFileDialog/0.0.1536.824@0.0.1536.824" timestamp="1588949459810" />
     <state x="270" y="54" key="SettingsEditor" timestamp="1588994605890">
       <screen x="0" y="0" width="1536" height="824" />
