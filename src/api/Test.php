@@ -28,6 +28,6 @@ class Test extends JsonAPI {
   }
 
   protected function needToken(): bool {
-    return false;
+    return true;
   }
 }

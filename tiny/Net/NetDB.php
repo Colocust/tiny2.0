@@ -78,7 +78,10 @@ class NetDB extends Redis {
 
   public function isValidNet(): bool {
     $netId = self::NET . $this->net;
-    return $this->db->exists($netId);
+    if ($this->db->exists($netId) === 1 || $this->db->exists($netId) === true) {
+      return true;
+    }
+    return false;
   }
 
   private function read() {
