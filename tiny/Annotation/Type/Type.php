@@ -5,6 +5,7 @@ namespace Tiny\Annotation;
 
 
 use Tiny\Annotation\Type\ArrayType;
+use Tiny\Annotation\Type\PrimitiveType;
 use Tiny\Annotation\Type\UserDefinedType;
 
 /**

@@ -1,8 +1,10 @@
 <?php declare(strict_types=1);
 
 
-namespace Tiny\Annotation;
+namespace Tiny\Annotation\Type;
 
+
+use Tiny\Annotation\Type;
 
 class PrimitiveType extends Type {
 
