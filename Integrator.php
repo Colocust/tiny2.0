@@ -48,10 +48,9 @@ EOF;
   }
 
   private function scanDir(string $dir = "") {
-    if (!$dir) {
-      $currentDir = __ROOT__;
-    } else {
-      $currentDir = __ROOT__ . $dir;
+    $currentDir = __ROOT__;
+    if ($dir) {
+      $currentDir .= $dir;
     }
 
     $directories = scandir($currentDir);
