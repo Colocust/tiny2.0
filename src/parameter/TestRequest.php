@@ -8,7 +8,7 @@ use Tiny\Foundation\Server\Request;
 
 class TestRequest extends Request {
   /**
-   * @var Item[]
+   * @var string
    * @uses \Tiny\Annotation\Uses\Required
    */
   public $id;

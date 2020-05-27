@@ -20,8 +20,6 @@ class Main {
       $request = new Request();
       $request->api = str_replace('/', '\\', $httpRequest->server['request_uri']);
 
-      $_SERVER['REQUEST_URI'] = $request->api;
-
       Logger::getInstance()->info('start');
 
       do {

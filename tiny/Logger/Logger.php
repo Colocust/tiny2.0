@@ -60,9 +60,6 @@ class Logger {
   private function makeMessage(): string {
     return Time::getCurrentMillSecondToString()
       . " %s %s"
-      . '['
-      . @$_SERVER['REQUEST_URI']
-      . ']'
       . ' --- '
       . "%s"
       . PHP_EOL;

@@ -10,18 +10,19 @@ class Server {
 
   const HOST = '0.0.0.0';
   const PORT = 9502;
-  private $server = null;
 
   public function __construct() {
-    $this->server = new Swoole\WebSocket\Server(self::HOST, self::PORT);
+    $server = new Swoole\WebSocket\Server(self::HOST, self::PORT);
 
-    $this->server->set(['worker_num' => 4, 'task_worker_num' => 4,]);
+    $GLOBALS['WEBSOCKET_SERVER'] = $server;
 
-    $this->server->on('start', function ($server) {
+    $server->set(['worker_num' => 4, 'task_worker_num' => 4,]);
+
+    $server->on('start', function ($server) {
       swoole_set_process_name("HTTP_SERVER");
     });
 
-    $this->server->on('task', function ($server, $taskId, $workId, $task) {
+    $server->on('task', function ($server, $taskId, $workId, $task) {
       /**
        * @var $task Task
        */
@@ -29,27 +30,25 @@ class Server {
       return 'Task FINISH';
     });
 
-    $this->server->on('finish', function ($server, $taskId, $data) {
+    $server->on('finish', function ($server, $taskId, $data) {
     });
 
-    $this->server->on('request', function ($request, $response) {
-      $_SERVER['SWOOLE_SERVER'] = $this->server;
-
+    $server->on('request', function ($request, $response) {
       $main = new Main();
       $main->go($request, $response);
     });
 
-    $this->server->on('WorkerStart', function ($server, $worker_id) {
+    $server->on('WorkerStart', function ($server, $worker_id) {
       include_once __ROOT__ . '/tiny/Loader/Loader.php';
       include_once __ROOT__ . '/Config.php';
       Loader::register();
     });
 
-    $this->server->on('message', [$this, 'onMessage']);
-    $this->server->on('open', [$this, 'onOpen']);
-    $this->server->on('close', [$this, 'onClose']);
+    $server->on('message', [$this, 'onMessage']);
+    $server->on('open', [$this, 'onOpen']);
+    $server->on('close', [$this, 'onClose']);
 
-    $this->server->start();
+    $server->start();
   }
 
   public function onMessage($ws, $frame) {

@@ -28,7 +28,7 @@ use Tiny\NetValue;
  *
  */
 class NetDB extends Redis {
-  private $net;
+  private $net_;
   /**
    * @var $value NetValue
    */
@@ -38,7 +38,7 @@ class NetDB extends Redis {
   const OWNER = 'owner_';
 
   public function __construct(string $net) {
-    $this->net = $net;
+    $this->net_ = $net;
 
     parent::__construct(new Config(NetConfig::HOST
       , NetConfig::PORT
@@ -53,7 +53,7 @@ class NetDB extends Redis {
 
     $value = new NetValue($owner);
 
-    $netId = self::NET . $this->net;
+    $netId = self::NET . $this->net_;
     $ownerId = self::OWNER . $owner;
 
     $this->db->setex($netId, $ttl, json_encode($value));
@@ -62,14 +62,14 @@ class NetDB extends Redis {
 
   public function refreshNet(int $ttl): void {
     if ($this->isValidNet()) {
-      $netId = self::NET . $this->net;
+      $netId = self::NET . $this->net_;
       $this->db->expire($netId, $ttl);
     }
   }
 
   public function readOwner() {
     if (!$this->isValidNet()) {
-      Logger::getInstance()->warn($this->net . 'is invalid');
+      Logger::getInstance()->warn($this->net_ . 'is invalid');
       return null;
     }
     $this->read();
@@ -77,7 +77,7 @@ class NetDB extends Redis {
   }
 
   public function isValidNet(): bool {
-    $netId = self::NET . $this->net;
+    $netId = self::NET . $this->net_;
     if ($this->db->exists($netId) === 1 || $this->db->exists($netId) === true) {
       return true;
     }
@@ -88,7 +88,7 @@ class NetDB extends Redis {
     if ($this->value !== null) {
       return;
     }
-    $netId = self::NET . $this->net;
+    $netId = self::NET . $this->net_;
 
     $value = $this->db->get($netId);
     $this->value = json_decode($value);
@@ -96,7 +96,7 @@ class NetDB extends Redis {
   }
 
   public function del(): void {
-    $netId = self::NET . $this->net;
+    $netId = self::NET . $this->net_;
     $owner = $this->readOwner();
     $this->db->del($netId);
     $this->db->sRem($owner, $netId);
@@ -114,6 +114,6 @@ class NetDB extends Redis {
   }
 
   public function getID(): string {
-    return $this->net;
+    return $this->net_;
   }
 }

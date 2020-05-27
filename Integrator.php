@@ -26,7 +26,7 @@ define('EXT', 'php');
  *
  */
 class Integrator {
-  private static $classMaps = [];
+  private static $classMap = [];
   private static $filterDirectory = ['.', '..', '.idea'];
 
   public function go() {
@@ -34,14 +34,14 @@ class Integrator {
     $this->scanDir();
 
     $file = fopen('__ClassLoader__.php', 'w');
-    $classMaps = var_export(self::$classMaps, true);
+    $classMap = var_export(self::$classMap, true);
     $content = <<<EOF
 <?php declare(strict_types=1);
 
 namespace Tiny;
 
 class __ClassLoader__ {
-  public const classMaps = $classMaps;
+  public const classMaps = $classMap;
 }
 EOF;
     fwrite($file, $content);
@@ -86,7 +86,7 @@ EOF;
 
     $className = $namespace . '\\' . $class;
 
-    self::$classMaps[$className] = $dir;
+    self::$classMap[$className] = $dir;
   }
 
 }

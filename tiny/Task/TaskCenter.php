@@ -7,7 +7,7 @@ namespace Tiny;
 class TaskCenter {
 
   public static function post(Task $task) {
-    $_SERVER['SWOOLE_SERVER']->task($task);
+    $GLOBALS['WEBSOCKET_SERVER']->task($task);
   }
 
 }
