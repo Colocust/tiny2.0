@@ -5,12 +5,11 @@ namespace Tiny\MongoDB;
 
 
 class Config {
-  public function __construct(string $uri
-    , string $user
-    , string $password
-    , string $dbname
-    , string $collection) {
-
+  public function __construct(string $uri,
+                              string $user,
+                              string $password,
+                              string $dbname,
+                              string $collection) {
     $this->uri_ = $uri;
     $this->user_ = $user;
     $this->password_ = $password;

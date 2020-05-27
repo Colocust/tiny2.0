@@ -28,7 +28,6 @@ class MongoDB {
   }
 
   /**
-   * 获取连接对象
    * @return \MongoDB\Driver\Manager|null
    */
   public function getManager(): Manager {
