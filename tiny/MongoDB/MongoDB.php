@@ -16,6 +16,11 @@ class MongoDB {
   private $manager_;
 
   public function __construct(Config $config) {
+    $this->uri_ = $config->uri_;
+    $this->user_ = $config->user_;
+    $this->password_ = $config->password_;
+    $this->dbname_ = $config->dbname_;
+    $this->collection_ = $config->collection_;
   }
 
   public function getNs(): string {

@@ -12,7 +12,7 @@ use Tiny\Logger;
 
 class Test extends JsonAPI {
 
-  private static $map = [];
+  public $map = [];
 
   protected function requestClass(): Request {
     return new TestRequest();
@@ -22,9 +22,8 @@ class Test extends JsonAPI {
     $request = TestRequest::fromAPI($this);
     $response = new TestResponse();
 
-    self::$map[$request->id] = 1;
-    Logger::getInstance()->info(json_encode(self::$map));
-
+    $this->map[$request->id] = 1;
+    Logger::getInstance()->info(json_encode($this->map));
     return $response;
   }
 
