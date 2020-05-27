@@ -5,7 +5,7 @@ namespace Tiny\Redis;
 
 
 class Config {
-  public $host = "127.0.0.1";
+  public $host = '127.0.0.1';
   public $port = 0;
   public $timeout = 100;
   public $dbNo = 1;
