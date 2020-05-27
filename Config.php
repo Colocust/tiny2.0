@@ -18,11 +18,3 @@ namespace Tiny\Cache {
     const DB = 3;
   }
 }
-
-namespace Tiny\MongoDB {
-  class Config {
-    const ADDRESS = '';
-    const USER = '';
-    const PASSWORD = '';
-  }
-}
