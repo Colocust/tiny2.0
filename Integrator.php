@@ -41,7 +41,7 @@ class Integrator {
 namespace Tiny;
 
 class __ClassLoader__ {
-  public const classMaps = $classMap;
+  public const classMap = $classMap;
 }
 EOF;
     fwrite($file, $content);
