@@ -11,8 +11,6 @@ use Tiny\Task;
 
 class TestTask extends Task {
 
-  public $a;
-
   public function go() {
     $builder = new HttpBuilder();
     $builder->setUrl('https://restapi.amap.com/v3/geocode/regeo');

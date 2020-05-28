@@ -45,6 +45,7 @@ class __ClassLoader__ {
 }
 EOF;
     fwrite($file, $content);
+
   }
 
   private function scanDir(string $dir = "") {
@@ -63,7 +64,7 @@ EOF;
       $next = $dir . DIRECTORY_SEPARATOR . $directory;
 
       if (is_file($current)) {
-        $this->addToClassMaps($next);
+        $this->addClassMap($next);
         continue;
       }
       if (is_dir($current)) {
@@ -72,7 +73,7 @@ EOF;
     }
   }
 
-  private function addToClassMaps(string $dir) {
+  private function addClassMap(string $dir) {
     $fileDir = __ROOT__ . $dir;
 
     $pathInfo = pathinfo($fileDir);

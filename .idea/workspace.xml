@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97eea35c-b950-4e1b-8572-17c938ae5d3e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/tiny/MySQL/Config.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tiny/MySQL/MySQL.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tiny/MongoDB/Config.php" beforeDir="false" afterPath="$PROJECT_DIR$/tiny/MongoDB/Config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tiny/MongoDB/MongoDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/tiny/MongoDB/MongoDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Integrator.php" beforeDir="false" afterPath="$PROJECT_DIR$/Integrator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/__ClassLoader__.php" beforeDir="false" afterPath="$PROJECT_DIR$/__ClassLoader__.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/task/TestTask.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/task/TestTask.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiny/MySQL/Config.php" beforeDir="false" afterPath="$PROJECT_DIR$/tiny/MySQL/Config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiny/MySQL/MySQL.php" beforeDir="false" afterPath="$PROJECT_DIR$/tiny/MySQL/MySQL.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +90,8 @@
       <workItem from="1590457767146" duration="370000" />
       <workItem from="1590473377430" duration="3056000" />
       <workItem from="1590560348342" duration="14919000" />
-      <workItem from="1590587433535" duration="3782000" />
+      <workItem from="1590587433535" duration="4132000" />
+      <workItem from="1590630234596" duration="4707000" />
     </task>
     <servers />
   </component>

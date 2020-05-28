@@ -13,14 +13,14 @@ class Config {
                               string $password) {
     $this->host_ = $host;
     $this->port_ = $port;
-    $this->dbname = $dbname;
-    $this->user = $user;
-    $this->password = $password;
+    $this->dbname_ = $dbname;
+    $this->user_ = $user;
+    $this->password_ = $password;
   }
 
   public $host_;
   public $port_;
-  public $dbname;
-  public $user;
-  public $password;
+  public $dbname_;
+  public $user_;
+  public $password_;
 }
