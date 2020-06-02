@@ -10,6 +10,5 @@ interface Config extends OperationConfig {
   const CLUSTER = [
 
 
-
   ];
 }

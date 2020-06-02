@@ -4,32 +4,30 @@
 namespace Tiny\Pool\Redis;
 
 
-use Swoole\Coroutine;
-use Swoole\Database\RedisConfig;
-use Swoole\Database\RedisPool as SwooleRedisPool;
-use Swoole\Runtime;
-
 class RedisPool {
 
   private static $hasInit = false;
-  private static $pool;
+  private static $pool = [];
 
-  public static function get(string $host, string $port): SwooleRedisPool {
-    $key = $host . $port;
-    return self::$pool[$key];
+  public static function get(string $host, int $port): ?\Redis {
+    $key = self::generateKey($host, $port);
+
+    $redis = @self::$pool[$key];
+    if (is_null($redis)) {
+      return null;
+    }
+
+    unset(self::$pool[$key]);
+    return $redis;
   }
 
   private function __construct() {
     foreach (Config::CLUSTER as $cluster) {
-      $key = $cluster['host'] . $cluster['port'];
+      $key = self::generateKey($cluster['host'], $cluster['port']);
+      $redis = new \Redis();
+      $redis->connect($cluster['host'], $cluster['port']);
 
-      self::$pool[$key] = new SwooleRedisPool((new RedisConfig)
-        ->withHost($cluster['host'])
-        ->withPort($cluster['port'])
-        ->withAuth('')
-        ->withDbIndex(0)
-        ->withTimeout(1)
-      );
+      self::$pool[$key] = $redis;
     }
     self::$hasInit = true;
   }
@@ -41,4 +39,14 @@ class RedisPool {
 
   private function __clone() {
   }
+
+  public static function return(string $host, int $port, \Redis $redis) {
+    $key = self::generateKey($host, $port);
+    self::$pool[$key] = $redis;
+  }
+
+  private static function generateKey(string $host, int $port): string {
+    return $host . ':' . $port;
+  }
 }
+

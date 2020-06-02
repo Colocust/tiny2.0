@@ -42,6 +42,8 @@ class Server {
       include_once __ROOT__ . '/tiny/Loader/Loader.php';
       include_once __ROOT__ . '/Config.php';
       Loader::register();
+
+      \Tiny\Pool\Redis\RedisPool::init();
     });
 
     $server->on('message', [$this, 'onMessage']);
