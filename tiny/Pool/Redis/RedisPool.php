@@ -4,13 +4,22 @@
 namespace Tiny\Pool\Redis;
 
 
+use Tiny\Annotation\Reflection\ReflectionClass;
+use Tiny\Logger;
+use Tiny\Redis;
+
 class RedisPool {
 
   private static $hasInit = false;
-  private static $pool = [];
+  public static $pool = [];
 
-  public static function get(string $host, int $port): ?\Redis {
-    $key = self::generateKey($host, $port);
+  private $configClass = [
+    'Tiny\\Cache\\Config',
+    'Tiny\\Net\\Config',
+  ];
+
+  public static function get(string $host, int $port, int $dbNo): ?\Redis {
+    $key = self::generateKey($host, $port, $dbNo);
 
     $redis = @self::$pool[$key];
     if (is_null($redis)) {
@@ -22,13 +31,24 @@ class RedisPool {
   }
 
   private function __construct() {
-    foreach (Config::CLUSTER as $cluster) {
-      $key = self::generateKey($cluster['host'], $cluster['port']);
-      $redis = new \Redis();
-      $redis->connect($cluster['host'], $cluster['port']);
+    foreach ($this->configClass as $configClass) {
+      $instance = new ReflectionClass($configClass);
+      $class = $instance->getInstance()->newInstanceWithoutConstructor();
+      $key = self::generateKey($class::HOST, $class::PORT, $class::DB);
+      if (isset(self::$pool[$key])) {
+        continue;
+      }
 
-      self::$pool[$key] = $redis;
+      $config = new Redis\Config($class::HOST, $class::PORT, $class::TIMEOUT, $class::DB);
+      try {
+        $redis = new Redis($config);
+        self::$pool[$key] = $redis->db;
+      } catch (\Exception $e) {
+        Logger::getInstance()->fatal('', $e);
+      }
     }
+
+
     self::$hasInit = true;
   }
 
@@ -40,13 +60,12 @@ class RedisPool {
   private function __clone() {
   }
 
-  public static function return(string $host, int $port, \Redis $redis) {
-    $key = self::generateKey($host, $port);
+  public static function return(string $host, int $port, int $dbNo, \Redis $redis) {
+    $key = self::generateKey($host, $port, $dbNo);
     self::$pool[$key] = $redis;
   }
 
-  private static function generateKey(string $host, int $port): string {
-    return $host . ':' . $port;
+  private static function generateKey(string $host, int $port, int $db): string {
+    return md5($host . ':' . $port . ':' . $db);
   }
 }
-

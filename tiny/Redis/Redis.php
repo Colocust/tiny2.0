@@ -27,6 +27,6 @@ class Redis {
     }
   }
 
-  protected $db;
+  public $db;
 
 }

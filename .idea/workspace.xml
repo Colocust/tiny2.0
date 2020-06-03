@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97eea35c-b950-4e1b-8572-17c938ae5d3e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/tiny/Pool/Redis/Config.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tiny/Pool/Redis/RedisPool.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config.php" beforeDir="false" afterPath="$PROJECT_DIR$/Config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/__ClassLoader__.php" beforeDir="false" afterPath="$PROJECT_DIR$/__ClassLoader__.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/error.log" beforeDir="false" afterPath="$PROJECT_DIR$/error.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiny/Pool/Redis/Config.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiny/Pool/Redis/RedisPool.php" beforeDir="false" afterPath="$PROJECT_DIR$/tiny/Pool/Redis/RedisPool.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiny/Redis/Redis.php" beforeDir="false" afterPath="$PROJECT_DIR$/tiny/Redis/Redis.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,9 +17,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
-    <execution>
-      <executable />
-    </execution>
+    <execution />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -26,31 +29,39 @@
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
     <property name="settings.editor.selected.configurable" value="fileTemplates" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\framework" />
-      <recent name="C:\wamp64\www\framework\tiny\Foundation\src\Server" />
-      <recent name="C:\wamp64\www\framework\tiny\Server\src" />
-      <recent name="C:\wamp64\www\framework\tiny\Server" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\framework" />
       <recent name="C:\wamp64\www\framework\tiny\Validate" />
       <recent name="C:\wamp64\www\framework\tiny\Task" />
       <recent name="C:\wamp64\www\framework\tiny\Serialize" />
       <recent name="C:\wamp64\www\framework\tiny\Redis" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="C:\wamp64\www\framework" />
+      <recent name="C:\wamp64\www\framework\tiny\Foundation\src\Server" />
+      <recent name="C:\wamp64\www\framework\tiny\Server\src" />
+      <recent name="C:\wamp64\www\framework\tiny\Server" />
     </key>
   </component>
   <component name="SvnConfiguration">
@@ -91,13 +102,22 @@
       <workItem from="1590630234596" duration="4816000" />
       <workItem from="1590659878781" duration="1509000" />
       <workItem from="1590742964010" duration="5333000" />
+      <workItem from="1591021106090" duration="399000" />
+      <workItem from="1591081086074" duration="7478000" />
+      <workItem from="1591092459319" duration="1489000" />
+      <workItem from="1591148478289" duration="3745000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="1912" y="134" key="#Inspections" timestamp="1591094230807">
+      <screen x="1440" y="23" width="1920" height="1057" />
+    </state>
+    <state x="354" y="107" key="#Inspections/0.23.1440.797/1440.23.1920.1057@0.23.1440.797" timestamp="1591089056620" />
+    <state x="1912" y="134" key="#Inspections/0.23.1440.797/1440.23.1920.1057@1440.23.1920.1057" timestamp="1591094230807" />
     <state x="569" y="97" key="#com.intellij.ide.util.MemberChooser" timestamp="1589380497853">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

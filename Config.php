@@ -18,14 +18,3 @@ namespace Tiny\Cache {
     const DB = 3;
   }
 }
-
-namespace Tiny\Pool\Redis {
-  class Config {
-    const CLUSTER = [
-      [
-        'host' => '127.0.0.1',
-        'port' => 6379
-      ]
-    ];
-  }
-}
