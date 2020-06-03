@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="97eea35c-b950-4e1b-8572-17c938ae5d3e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config.php" beforeDir="false" afterPath="$PROJECT_DIR$/Config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__ClassLoader__.php" beforeDir="false" afterPath="$PROJECT_DIR$/__ClassLoader__.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/error.log" beforeDir="false" afterPath="$PROJECT_DIR$/error.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tiny/Pool/Redis/Config.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tiny/Pool/Redis/RedisPool.php" beforeDir="false" afterPath="$PROJECT_DIR$/tiny/Pool/Redis/RedisPool.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tiny/Redis/Redis.php" beforeDir="false" afterPath="$PROJECT_DIR$/tiny/Redis/Redis.php" afterDir="false" />
-    </list>
+    <list default="true" id="97eea35c-b950-4e1b-8572-17c938ae5d3e" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -105,7 +96,7 @@
       <workItem from="1591021106090" duration="399000" />
       <workItem from="1591081086074" duration="7478000" />
       <workItem from="1591092459319" duration="1489000" />
-      <workItem from="1591148478289" duration="3745000" />
+      <workItem from="1591148478289" duration="4382000" />
     </task>
     <servers />
   </component>

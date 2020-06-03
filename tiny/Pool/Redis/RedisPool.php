@@ -14,8 +14,7 @@ class RedisPool {
   public static $pool = [];
 
   private $configClass = [
-    'Tiny\\Cache\\Config',
-    'Tiny\\Net\\Config',
+
   ];
 
   public static function get(string $host, int $port, int $dbNo): ?\Redis {
