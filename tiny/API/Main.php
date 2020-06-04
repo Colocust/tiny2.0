@@ -7,6 +7,7 @@ namespace Tiny;
 use Tiny\API\HttpStatus;
 use Tiny\API\Request;
 use Tiny\API\Response;
+use Tiny\Pool\Redis\RedisPool;
 
 class Main {
 
@@ -44,7 +45,7 @@ class Main {
       } while (false);
 
     } catch (\Exception $exception) {
-      $response->httpStatus = $exception->getCode();
+      $response->httpStatus = $exception->getCode() === 0 ?  HttpStatus::FAILED : $exception->getCode();
       Logger::getInstance()->fatal($exception->getMessage(), $exception);
     } catch (\Error $error) {
       $response->httpStatus = HttpStatus::FAILED;

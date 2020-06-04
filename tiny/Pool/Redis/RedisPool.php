@@ -6,7 +6,6 @@ namespace Tiny\Pool\Redis;
 
 use Tiny\Annotation\Reflection\ReflectionClass;
 use Tiny\Logger;
-use Tiny\Redis;
 
 class RedisPool {
 
@@ -14,11 +13,12 @@ class RedisPool {
   public static $pool = [];
 
   private $configClass = [
-
+    'Tiny\Net\Config',
+    'Tiny\Cache\Config',
   ];
 
-  public static function get(string $host, int $port, int $dbNo): ?\Redis {
-    $key = self::generateKey($host, $port, $dbNo);
+  public static function get(string $host, int $port): ?\Redis {
+    $key = self::generateKey($host, $port);
 
     $redis = @self::$pool[$key];
     if (is_null($redis)) {
@@ -33,20 +33,22 @@ class RedisPool {
     foreach ($this->configClass as $configClass) {
       $instance = new ReflectionClass($configClass);
       $class = $instance->getInstance()->newInstanceWithoutConstructor();
-      $key = self::generateKey($class::HOST, $class::PORT, $class::DB);
+      $key = self::generateKey($class::HOST, $class::PORT);
+
       if (isset(self::$pool[$key])) {
         continue;
       }
 
-      $config = new Redis\Config($class::HOST, $class::PORT, $class::TIMEOUT, $class::DB);
-      try {
-        $redis = new Redis($config);
-        self::$pool[$key] = $redis->db;
-      } catch (\Exception $e) {
-        Logger::getInstance()->fatal('', $e);
+      $db = new \Redis();
+      $res = $db->pconnect($class::HOST, $class::PORT, $class::TIMEOUT, (string)$class::PORT . '-' . (string)$class::DB);
+      if (!$res) {
+        Logger::getInstance()->fatal("connect redis("
+          . $class::HOST . ":" . $class::PORT . ") error");
+        throw new \Exception("connect redis error");
       }
-    }
 
+      self::$pool[$key] = $db;
+    }
 
     self::$hasInit = true;
   }
@@ -59,12 +61,12 @@ class RedisPool {
   private function __clone() {
   }
 
-  public static function return(string $host, int $port, int $dbNo, \Redis $redis) {
-    $key = self::generateKey($host, $port, $dbNo);
+  public static function return(string $host, int $port, \Redis $redis) {
+    $key = self::generateKey($host, $port);
     self::$pool[$key] = $redis;
   }
 
-  private static function generateKey(string $host, int $port, int $db): string {
-    return md5($host . ':' . $port . ':' . $db);
+  private static function generateKey(string $host, int $port): string {
+    return md5($host . ':' . $port);
   }
 }

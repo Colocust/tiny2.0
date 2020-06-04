@@ -2,6 +2,7 @@
 
 use Tiny\Loader;
 use Tiny\Main;
+use Tiny\Pool\Redis\RedisPool;
 use Tiny\Task;
 
 define('__ROOT__', __DIR__);
@@ -16,7 +17,7 @@ class Server {
 
     $GLOBALS['WEBSOCKET_SERVER'] = $server;
 
-    $server->set(['worker_num' => 4, 'task_worker_num' => 4,]);
+    $server->set(['worker_num' => 2, 'task_worker_num' => 2]);
 
     $server->on('start', function ($server) {
       swoole_set_process_name("HTTP_SERVER");
@@ -34,6 +35,7 @@ class Server {
     });
 
     $server->on('request', function ($request, $response) {
+      RedisPool::init();
       $main = new Main();
       $main->go($request, $response);
     });
@@ -42,8 +44,6 @@ class Server {
       include_once __ROOT__ . '/tiny/Loader/Loader.php';
       include_once __ROOT__ . '/Config.php';
       Loader::register();
-
-      \Tiny\Pool\Redis\RedisPool::init();
     });
 
     $server->on('message', [$this, 'onMessage']);
@@ -69,3 +69,4 @@ class Server {
 \Co::set(['hook_flags' => SWOOLE_HOOK_ALL | SWOOLE_HOOK_CURL]);
 
 new Server();
+
