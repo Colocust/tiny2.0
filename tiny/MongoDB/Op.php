@@ -23,12 +23,21 @@ class Op {
     '!=' => NeStrategy::class
   ];
 
-  public function getOp(string $op, $value) {
-    $op = self::OP[$op];
+  public function getValue() {
+    $class = self::OP[$this->op_];
+
     /**
-     * @var $opClass OpStrategy
+     * @var $strategy OpStrategy
      */
-    $opClass = new $op($value);
-    return $opClass->getOpValue();
+    $strategy = new $class($this->value_);
+    return $strategy->getValue();
   }
+
+  public function __construct(string $op, $value) {
+    $this->op_ = $op;
+    $this->value_ = $value;
+  }
+
+  private $op_;
+  private $value_;
 }

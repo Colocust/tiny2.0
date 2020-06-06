@@ -6,7 +6,7 @@ namespace Tiny\MongoDB\Op;
 
 class LteStrategy extends OpStrategy {
 
-  public function getOpValue() {
+  public function getValue() {
     return ['$lte' => $this->value_];
   }
 }
