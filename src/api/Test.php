@@ -4,10 +4,10 @@
 namespace API;
 
 
+use Enum\ResultEnum;
 use Tiny\Foundation\Server\JsonAPI;
 use Tiny\Foundation\Server\Request;
 use Tiny\Foundation\Server\Response;
-use Tiny\Logger;
 
 
 class Test extends JsonAPI {
@@ -22,8 +22,6 @@ class Test extends JsonAPI {
     $request = TestRequest::fromAPI($this);
     $response = new TestResponse();
 
-    $this->map[$request->id] = 1;
-    Logger::getInstance()->info(json_encode($this->map));
     return $response;
   }
 
