@@ -18,3 +18,12 @@ namespace Tiny\Cache {
     const DB = 3;
   }
 }
+
+namespace TinyDB {
+  class Config {
+    const URI = 'mongodb://127.0.0.1';
+    const USER = 'locust';
+    const PASSWORD = 'locust0429';
+    const DBNAME = 'tiny';
+  }
+}

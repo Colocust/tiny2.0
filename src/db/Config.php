@@ -1,9 +1,14 @@
 <?php declare(strict_types=1);
 
 
-namespace DB;
+namespace TinyDB;
 
 
-class Config {
+use Tiny\OperationConfig;
 
+interface Config extends OperationConfig {
+  const URI = '';
+  const USER = '';
+  const PASSWORD = '';
+  const DBNAME = '';
 }
