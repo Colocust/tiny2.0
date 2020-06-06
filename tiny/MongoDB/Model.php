@@ -22,8 +22,9 @@ abstract class Model {
 
   abstract public function getCollection(): string;
 
-  protected function find(Filter $filter, QueryOptions $queryOptions): Cursor {
-    return $this->db_->getManager()->executeQuery($this->db_->getNs(), new Query($filter->getFilter(), $queryOptions->getQueryOptions()));
+  protected function find(Filter $filter, ?QueryOptions $queryOptions = null): Cursor {
+    return $this->db_->getManager()->executeQuery($this->db_->getNs(), new Query($filter->getFilter(),
+      $queryOptions ? $queryOptions->getQueryOptions() : []));
   }
 
   protected function update(Filter $filter, NewObject $newObject): bool {

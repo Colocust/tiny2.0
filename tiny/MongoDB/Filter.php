@@ -7,9 +7,8 @@ namespace Tiny\MongoDB;
 class Filter {
   private $filter = [];
 
-  public function where(string $field, string $op, $value): self {
-    $class = new Op($op, $value);
-    $this->filter[$field] = $class->getValue();
+  public function where(string $field, OpEnum $op, $value): self {
+    $this->filter[$field] = $op->getOpStrategyValue($value);
     return $this;
   }
 
@@ -18,9 +17,8 @@ class Filter {
     return $this;
   }
 
-  public function or(string $field, string $op, $value): self {
-    $class = new Op($op, $value);
-    $this->filter['$or'][] = [$field => $class->getValue()];
+  public function or(string $field, OpEnum $op, $value): self {
+    $this->filter['$or'][] = [$field => $op->getOpStrategyValue($value)];
     return $this;
   }
 

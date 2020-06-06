@@ -77,7 +77,7 @@ class __ClassLoader__ {
   'Tiny\\MongoDB\\Op\\LteStrategy' => '/tiny/MongoDB/Op/LteStrategy.php',
   'Tiny\\MongoDB\\Op\\NeStrategy' => '/tiny/MongoDB/Op/NeStrategy.php',
   'Tiny\\MongoDB\\Op\\OpStrategy' => '/tiny/MongoDB/Op/OpStrategy.php',
-  'Tiny\\MongoDB\\Op' => '/tiny/MongoDB/Op.php',
+  'Tiny\\MongoDB\\OpEnum' => '/tiny/MongoDB/OpEnum.php',
   'Tiny\\MongoDB\\QueryOptions' => '/tiny/MongoDB/QueryOptions.php',
   'Tiny\\MySQL\\Config' => '/tiny/MySQL/Config.php',
   'Tiny\\MySQL\\MySQL' => '/tiny/MySQL/MySQL.php',
