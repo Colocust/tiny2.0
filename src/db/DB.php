@@ -1,9 +1,18 @@
 <?php declare(strict_types=1);
 
 
-namespace DB;
+namespace TinyDB;
 
+use Tiny\MongoDB\Config;
+use Tiny\MongoDB\Model;
 
-class DB {
-
+abstract class DB extends Model {
+  public function __construct() {
+    $config = new Config(\TinyDB\Config::URI
+      , \TinyDB\Config::USER
+      , \TinyDB\Config::PASSWORD
+      , \TinyDB\Config::DBNAME,
+      $this->getCollection());
+    parent::__construct($config);
+  }
 }
