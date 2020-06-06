@@ -4,6 +4,9 @@
 namespace TinyDB;
 
 
-class AccountUser {
+class AccountUser extends DB {
 
+  public function getCollection(): string {
+    return 'AccountUser';
+  }
 }
