@@ -7,14 +7,13 @@ namespace Tiny\MongoDB;
 class QueryOptions {
   private $options = [];
 
-
   public function limit(int $limit): self {
     $this->options['limit'] = $limit;
     return $this;
   }
 
-  public function sort(string $field, int $sort): self {
-    $this->options['sort'] = [$field => $sort];
+  public function sort(string $field, SortEnum $sort): self {
+    $this->options['sort'] = [$field => $sort->getValue()];
     return $this;
   }
 

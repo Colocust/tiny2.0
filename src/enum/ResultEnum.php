@@ -7,5 +7,5 @@ namespace Enum;
 use Tiny\Enum\Enum;
 
 class ResultEnum extends Enum {
-  const SUCCESS = '1';
+  const SUCCESS = 'SUCCESS';
 }

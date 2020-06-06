@@ -10,7 +10,7 @@ class Enum {
 
   protected $value_;
 
-  public static $constants = [];
+  private static $constants = [];
 
   public function getValue() {
     return $this->value_;

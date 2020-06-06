@@ -79,6 +79,7 @@ class __ClassLoader__ {
   'Tiny\\MongoDB\\Op\\OpStrategy' => '/tiny/MongoDB/Op/OpStrategy.php',
   'Tiny\\MongoDB\\OpEnum' => '/tiny/MongoDB/OpEnum.php',
   'Tiny\\MongoDB\\QueryOptions' => '/tiny/MongoDB/QueryOptions.php',
+  'Tiny\\MongoDB\\SortEnum' => '/tiny/MongoDB/SortEnum.php',
   'Tiny\\MySQL\\Config' => '/tiny/MySQL/Config.php',
   'Tiny\\MySQL\\MySQL' => '/tiny/MySQL/MySQL.php',
   'Tiny\\Net\\Config' => '/tiny/Net/Config.php',
