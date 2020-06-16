@@ -20,7 +20,7 @@ class MySQL {
     $this->password_ = $config->password_;
   }
 
-  public function connect(): \PDO {
+  public function getInstance(): \PDO {
     $dsn = "mysql:host=$this->host_;port=$this->port_;dbname=$this->dbname_";
     $pdo = new \PDO($dsn, $this->user_, $this->password_, array(\PDO::ATTR_PERSISTENT => true));
     $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);

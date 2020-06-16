@@ -41,7 +41,7 @@ abstract class Model {
     return false;
   }
 
-  protected function updateOrCreateWhenNotExists(Filter $filter, NewObject $newObject) {
+  protected function updateOrCreateWhenNotExists(Filter $filter, NewObject $newObject): bool {
     $bulk = new BulkWrite();
     $bulk->update($filter->getFilter(), $newObject->getNewObject(), ['upsert' => true, 'multi' => false]);
     try {
@@ -82,7 +82,6 @@ abstract class Model {
   }
 
   protected function insert(Info $info): bool {
-    #todo convert
     $bulk = new BulkWrite();
     $bulk->insert($info->toArray());
     try {
