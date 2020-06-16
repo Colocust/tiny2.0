@@ -6,12 +6,25 @@ namespace Tiny\MySQL;
 
 class MySQL {
 
-  private $db_ = null;
+  private $host_;
+  private $port_;
+  private $dbname_;
+  private $user_;
+  private $password_;
 
   public function __construct(Config $config) {
-    $dsn = "mysql:host=$config->host_;dbname=$config->dbname_";
-    $this->db_ = new \PDO($dsn, $config->user_, $config->password_, array(\PDO::ATTR_PERSISTENT => true));
-    $this->db_->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-    $this->db_->query("set names utf8");
+    $this->host_ = $config->host_;
+    $this->port_ = $config->port_;
+    $this->dbname_ = $config->dbname_;
+    $this->user_ = $config->user_;
+    $this->password_ = $config->password_;
+  }
+
+  public function connect(): \PDO {
+    $dsn = "mysql:host=$this->host_;port=$this->port_;dbname=$this->dbname_";
+    $pdo = new \PDO($dsn, $this->user_, $this->password_, array(\PDO::ATTR_PERSISTENT => true));
+    $pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+    $pdo->query("set names utf8");
+    return $pdo;
   }
 }
