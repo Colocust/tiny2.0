@@ -7,61 +7,88 @@ namespace Tiny;
 use Tiny\API\HttpStatus;
 use Tiny\API\Request;
 use Tiny\API\Response;
-use Tiny\Pool\Redis\RedisPool;
 
 class Main {
+  private $request_;
+  private $response_;
 
-  public function go($httpRequest, $httpResponse) {
+  public function __construct() {
     ini_set('date.timezone', 'Asia/Shanghai');
     ini_set('display_errors', 'Off');
     error_reporting(E_ALL);
+    $this->request_ = new Request();
+    $this->response_ = new Response();
+  }
 
-    $response = new Response();
-    try {
-      $request = new Request();
-      $request->api = str_replace('/', '\\', $httpRequest->server['request_uri']);
+  public function fpmGo() {
+    $this->request_->api = str_replace('/', '\\', $_SERVER['REQUEST_URI']);
+    $this->request_->data = file_get_contents("php://input");
+    $this->request_->method = $_SERVER['REQUEST_METHOD'];
 
-      Logger::getInstance()->info('start');
+    $this->go();
 
-      do {
-        if (!class_exists($request->api)) {
-          Logger::getInstance()->fatal('API NOT FOUND');
-          $response->httpStatus = HttpStatus::NOT_FOUND;
-          break;
-        }
-
-        if ($httpRequest->server['request_method'] != 'POST') {
-          Logger::getInstance()->fatal('Not Support' . $httpRequest->server['request_method'] . 'Request Method');
-          $response->httpStatus = HttpStatus::FAILED;
-          break;
-        }
-
-        $request->data = $httpRequest->rawContent();
-        /**
-         * @var $api API
-         */
-        $api = new $request->api;
-        $api->process($request, $response);
-      } while (false);
-
-    } catch (\Exception $exception) {
-      $response->httpStatus = $exception->getCode() === 0 ?  HttpStatus::FAILED : $exception->getCode();
-      Logger::getInstance()->fatal($exception->getMessage(), $exception);
-    } catch (\Error $error) {
-      $response->httpStatus = HttpStatus::FAILED;
-      Logger::getInstance()->fatal($error->getMessage(), $error);
+    if ($this->response_->httpStatus != HttpStatus::SUC) {
+      header("HTTP/1.1 " . $this->response_->httpStatus);
+      foreach ($this->response_->httpHeaders as $header => $value) {
+        header($header . ': ' . $value);
+      }
+      return;
     }
 
-    foreach ($response->httpHeaders as $header => $value) {
+    foreach ($this->response_->httpHeaders as $header => $value) {
+      header($header . ': ' . $value);
+    }
+
+    if (isset($this->response_->data)) {
+      echo json_encode($this->response_->data);
+    }
+  }
+
+  private function go() {
+    Logger::getInstance()->info('start');
+    try {
+      if (!class_exists($this->request_->api)) {
+        $this->response_->httpStatus = HttpStatus::NOT_FOUND;
+        Logger::getInstance()->fatal('API NOT FOUND');
+        return;
+      }
+
+      if ($this->request_->method !== 'POST') {
+        Logger::getInstance()->fatal('Not Support' . $this->request_->method . 'Request Method');
+        $this->response_->httpStatus = HttpStatus::FAILED;
+        return;
+      }
+
+      /**
+       * @var $api API
+       */
+      $api = new $this->request_->api;
+      $api->process($this->request_, $this->response_);
+
+    } catch (\Exception $exception) {
+      $this->response_->httpStatus = HttpStatus::FAILED;
+      Logger::getInstance()->fatal("500 PHP Run Error", $exception);
+    }
+    Logger::getInstance()->info('end');
+  }
+
+  public function swooleGo($httpRequest, $httpResponse) {
+    $this->request_->api = str_replace('/', '\\', $httpRequest->server['request_uri']);
+    $this->request_->method = $httpRequest->server['request_method'];
+    $this->request_->data = $httpRequest->rawContent();
+
+    $this->go();
+
+    foreach ($this->response_->httpHeaders as $header => $value) {
       $httpResponse->header($header, $value);
     }
 
-    $httpResponse->status($response->httpStatus);
+    $httpResponse->status($this->response_->httpStatus);
 
-    if ($response->httpStatus != HttpStatus::SUC) {
-      $response->data = null;
+    if ($this->response_->httpStatus != HttpStatus::SUC) {
+      $this->response_->data = null;
     }
-    $httpResponse->end($response->data);
+    $httpResponse->end($this->response_->data);
     Logger::getInstance()->info('end');
   }
 }
