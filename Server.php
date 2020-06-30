@@ -37,7 +37,7 @@ class Server {
     $server->on('request', function ($request, $response) {
       RedisPool::init();
       $main = new Main();
-      $main->go($request, $response);
+      $main->swooleGo($request, $response);
     });
 
     $server->on('WorkerStart', function ($server, $worker_id) {
