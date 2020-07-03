@@ -4,8 +4,6 @@
 namespace Tiny\Enum;
 
 
-use Tiny\Annotation\Reflection\ReflectionClass;
-
 class Enum {
 
   protected $value_;
@@ -36,8 +34,8 @@ class Enum {
       return;
     }
 
-    $instance = new ReflectionClass(static::class);
-    $constants = $instance->getInstance()->getConstants();
+    $instance = new \ReflectionClass(static::class);
+    $constants = $instance->getConstants();
 
     self::$constants[static::class] = $constants;
   }
