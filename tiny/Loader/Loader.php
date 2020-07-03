@@ -15,7 +15,7 @@ class Loader {
 
   private static function load(string $class): bool {
     include_once __ROOT__ . DIRECTORY_SEPARATOR . '__ClassLoader__.php';
-    $classMap = __ClassLoader__::classMap;
+    $classMap = __ClassLoader__::$classMap;
     $dir = @$classMap[$class];
     if (is_null($dir)) {
       return false;
