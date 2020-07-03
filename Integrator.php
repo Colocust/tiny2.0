@@ -3,11 +3,11 @@
 namespace Tiny;
 
 
-use Tiny\Annotation\Reflection\ReflectionFile;
+use Tiny\Annotation\File;
 
 require_once "tiny/Helper/Time.php";
 require_once "tiny/Loader/Loader.php";
-require_once "tiny/Annotation/Reflection/ReflectionFile.php";
+require_once "tiny/Annotation/File.php";
 
 Loader::register();
 
@@ -35,17 +35,14 @@ class Integrator {
 
     $file = fopen('__ClassLoader__.php', 'w');
     $classMap = var_export(self::$classMap, true);
-    $content = <<<EOF
-<?php declare(strict_types=1);
-
+    $content =
+      '<?php declare(strict_types=1);
 namespace Tiny;
-
+        
 class __ClassLoader__ {
-  public const classMap = $classMap;
-}
-EOF;
+  public static $classMap = ' . $classMap . ';
+}';
     fwrite($file, $content);
-
   }
 
   private function scanDir(string $dir = "") {
@@ -81,7 +78,7 @@ EOF;
       return;
     }
 
-    $fileInstance = new ReflectionFile($fileDir);
+    $fileInstance = new File($fileDir);
     $namespace = $fileInstance->getNamespace();
     $class = $fileInstance->getClass();
 
