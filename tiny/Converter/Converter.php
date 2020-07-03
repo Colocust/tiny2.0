@@ -4,117 +4,112 @@
 namespace Tiny;
 
 
-use Tiny\Annotation\Reflection\ReflectionClass;
-use Tiny\Annotation\Reflection\ReflectionProperty;
+use Tiny\Annotation\Property;
 use Tiny\Annotation\Type;
-use Tiny\Annotation\Uses;
 use Tiny\API\HttpStatus;
 use Tiny\Exception\ConverterException;
 
-
 class Converter {
 
-  public function convert(object $from, object &$object): void {
-    $class = new ReflectionClass(get_class($object));
-    $reflectionProperties = $class->getInstance()->getProperties();
+  public static function toObject($from, object $to): void {
+    $reflectionClass = new \ReflectionClass($to);
+    $reflectionProperties = $reflectionClass->getProperties();
+
     foreach ($reflectionProperties as $reflectionProperty) {
-      $property = new ReflectionProperty($reflectionProperty->getDeclaringClass()->getName(), $reflectionProperty->getName());
+      $property = new Property($reflectionProperty);
 
-      $uses = $property->getUses();
-      if (is_null($uses)) {
-        throw new ConverterException("{$reflectionProperty->getName()} uses error"
-          , HttpStatus::ARGS_ERROR);
-      }
-      if (!$this->checkUsesIsRight(@$from->{$reflectionProperty->getName()}, $uses)) {
-        throw new ConverterException("{$reflectionProperty->getName()} is Required，But is null"
-          , HttpStatus::ARGS_ERROR);
-      }
+      $value = $from->{$reflectionProperty->getName()};
+      self::checkPropertyIsRight($value, $property);
 
-      $type = $property->getType();
-      if (is_null($type)) {
-        throw new ConverterException("{$reflectionProperty->getName()} type error"
-          , HttpStatus::ARGS_ERROR);
-      }
-
-      $value = @$from->{$reflectionProperty->getName()};
-      if (is_null($value)) {
-        continue;
-      }
-
-      if (!$this->checkTypeIsRight($value, $type)) {
-        throw new ConverterException($reflectionProperty->getName()
-          . " type error, except {$type->getTypeName()}, actual "
-          . json_encode($value)
-          . " get"
-          , HttpStatus::ARGS_ERROR);
-      }
-
-      if ($type->isUserDefinedClass()) {
-        /**
-         * @var $type Type\UserDefinedType
-         */
-        $userDefinedClass = (new ReflectionClass($type->getTypeName()))->getClassInstanceWithoutConstruct();
-        $this->convert($value, $userDefinedClass);
-        $reflectionProperty->setValue($object, $userDefinedClass);
-        continue;
-      }
-
-      if ($type->isArray()) {
-        $reflectionProperty->setValue($object, $this->convertArray($value, $type, $reflectionProperty->getName()));
-        continue;
-      }
-
-      $reflectionProperty->setValue($object, $value);
+      self::convert($value, $property, $to);
     }
+    var_dump($to);
+    exit;
   }
 
-  private function convertArray(array $array, Type $type, string $op): array {
-    $results = [];
-    /**
-     * @var $type Type\ArrayType
-     */
+  private static function convert($value, Property $property, object $to) {
+    $type = $property->getType();
+
+    if ($type->isArray()) {
+      /**
+       * @var $type Type\ArrayType
+       */
+      $to->{$property->getName()} = self::convertArray($value, $type, $property->getName());
+      return;
+    }
+
+    if ($type->isUserDefinedClass()) {
+      /**
+       * @var $type Type\UserDefinedType
+       */
+      $to->{$property->getName()} = self::convertUserDefinedClass($value, $type);
+      return;
+    }
+
+    $to->{$property->getName()} = $value;
+  }
+
+  private static function convertArray(array $value, Type\ArrayType $type, string $op): array {
+    $ret = [];
+
     $elementType = $type->getElementType();
-    foreach ($array as $key => $value) {
-      if (!$this->checkTypeIsRight($value, $elementType)) {
-        throw new ConverterException(
-          $op . "[$key] type error. except {$elementType->getTypeName()}, actual " . $value
-          , HttpStatus::ARGS_ERROR);
+    foreach ($value as $key => $item) {
+      if (!self::checkTypeIsRight($item, $elementType)) {
+        throw new ConverterException("变量 $op 中的第 $key 个元素类型错误");
       }
 
       if ($elementType->isArray()) {
-        $results[] = $this->convertArray($value, $elementType, $op . "[$key]");
+        /**
+         * @var $elementType Type\ArrayType
+         */
+        $ret[] = self::convertArray($item, $elementType, $op[$key]);
         continue;
       }
 
       if ($elementType->isUserDefinedClass()) {
-        $userDefinedClass = (new ReflectionClass($type->getElementTypeName()))->getClassInstanceWithoutConstruct();
-        $this->convert($value, $userDefinedClass);
-        $results[] = $userDefinedClass;
+
         continue;
       }
+
+      $ret[] = $value;
     }
-    return $results;
+    return $ret;
   }
 
-  private function checkTypeIsRight($value, Type $type): bool {
-    if (($type->isString() && is_string($value))
-      || ($type->isInt() && is_int($value))
-      || ($type->isFloat() && is_float($value))
-      || ($type->isBool() && is_bool($value))
-      || ($type->isNull() && is_null($value))
-      || ($type->isUserDefinedClass() && is_object($value))
-      || ($type->isArray() && is_array($value))
+  private static function convertUserDefinedClass(object $value, Type\UserDefinedType $type): object {
+    $reflectionClass = new \ReflectionClass($type->getTypeName());
+    $instance = $reflectionClass->newInstanceWithoutConstructor();
+
+    self::toObject($value, $instance);
+    return $instance;
+  }
+
+  private static function checkTypeIsRight($value, Type $type): bool {
+    if (
+      (is_int($value) && $type->isInt()) ||
+      (is_float($value) && $type->isFloat()) ||
+      (is_string($value) && $type->isString()) ||
+      (is_bool($value) && $type->isBool()) ||
+      (is_null($value) && $type->isNull()) ||
+      (is_array($value) && $type->isArray()) ||
+      (is_object($value) && $type->isUserDefinedClass())
     ) {
       return true;
     }
     return false;
   }
 
-
-  private function checkUsesIsRight($value, ?Uses $uses) {
-    if ((is_null($value) && $uses->isRequired())) {
-      return false;
+  private static function checkPropertyIsRight($value, Property $property) {
+    if (is_null($property->getUses()) || is_null($property->getType())) {
+      throw new ConverterException("变量 {$property->getName()} 规则定义错误～", HttpStatus::ARGS_ERROR);
     }
-    return true;
+
+    if (is_null($value) && $property->getUses()->isRequired()) {
+      throw new ConverterException("变量 {$property->getName()} 为必传参数");
+    }
+
+    if (!self::checkTypeIsRight($value, $property->getType())) {
+      throw new ConverterException("变量 {$property->getName()} 类型错误");
+    }
   }
 }

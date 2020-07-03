@@ -12,7 +12,6 @@ class Property {
     $this->property_ = $property;
   }
 
-
   public function getType(): ?Type {
     $docComment = $this->property_->getDocComment();
     if (!$docComment) {
@@ -26,10 +25,8 @@ class Property {
       return null;
     }
 
-    $type = Type::createType($this->property_->getDeclaringClass()->getName(), trim($matches[2]));
-    return $type;
+    return Type::createType($this->property_->getDeclaringClass()->getName(), trim($matches[2]));
   }
-
 
   public function getUses(): ?Uses {
     $docComment = $this->property_->getDocComment();
@@ -52,5 +49,9 @@ class Property {
     }
 
     return new $uses;
+  }
+
+  public function getName(): string {
+    return $this->property_->getName();
   }
 }
