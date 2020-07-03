@@ -14,10 +14,7 @@ class Redis {
       Logger::getInstance()->fatal("connect redis(" . $config->host . ":" . $config->port . ") error");
       throw new \Exception("connect redis error");
     }
-    $this->db->select($config->dbNo);
   }
 
-
   protected $db;
-
 }

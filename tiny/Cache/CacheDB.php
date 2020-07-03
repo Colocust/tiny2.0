@@ -29,7 +29,8 @@ class CacheDB extends Redis {
     parent::__construct(new Config(CacheConfig::HOST
       , CacheConfig::PORT
       , CacheConfig::TIMEOUT
-      , CacheConfig::DB));
+    ));
+    $this->db->select(CacheConfig::DB);
   }
 
   public function setex(int $ttl, string $value): void {

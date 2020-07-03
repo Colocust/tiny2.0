@@ -43,7 +43,8 @@ class NetDB extends Redis {
     parent::__construct(new Config(NetConfig::HOST
       , NetConfig::PORT
       , NetConfig::TIMEOUT
-      , NetConfig::DB));
+    ));
+    $this->db->select(NetConfig::DB);
   }
 
   public function createNet($owner, int $ttl): void {
