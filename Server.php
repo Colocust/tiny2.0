@@ -35,7 +35,6 @@ class Server {
     });
 
     $server->on('request', function ($request, $response) {
-      RedisPool::init();
       $main = new Main();
       $main->swooleGo($request, $response);
     });
