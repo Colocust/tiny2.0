@@ -1,22 +1,10 @@
 <?php declare(strict_types=1);
 
 
-namespace Tiny\Annotation\Reflection;
+namespace Tiny\Annotation;
 
 
-/**
- *
- * 文件注解器
- *
- * 可获取指定文件中的类名以及命名空间名
- *
- * 只会匹配出一个namespace和class
- *
- * 此处代码不严谨 需要改善
- *
- */
-class ReflectionFile {
-
+class File {
   private $content_;
 
   public function __construct(string $dir) {
@@ -36,8 +24,7 @@ class ReflectionFile {
       return null;
     }
 
-    $namespace = trim($matches[2]);
-    return $namespace;
+    return trim($matches[2]);
   }
 
   public function getClass(): ?string {
@@ -50,7 +37,6 @@ class ReflectionFile {
       return null;
     }
 
-    $class = trim($matches[2]);
-    return $class;
+    return trim($matches[2]);
   }
 }
