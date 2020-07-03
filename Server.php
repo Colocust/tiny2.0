@@ -2,7 +2,6 @@
 
 use Tiny\Loader;
 use Tiny\Main;
-use Tiny\Pool\Redis\RedisPool;
 use Tiny\Task;
 
 define('__ROOT__', __DIR__);
