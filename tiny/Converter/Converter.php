@@ -11,6 +11,12 @@ use Tiny\Exception\ConverterException;
 
 class Converter {
 
+  /**
+   * @param $from
+   * @param object $to
+   * @throws ConverterException
+   * @throws \ReflectionException
+   */
   public static function toObject($from, object $to): void {
     $reflectionClass = new \ReflectionClass($to);
     $reflectionProperties = $reflectionClass->getProperties();
@@ -23,8 +29,6 @@ class Converter {
 
       self::convert($value, $property, $to);
     }
-    var_dump($to);
-    exit;
   }
 
   private static function convert($value, Property $property, object $to) {
@@ -67,7 +71,10 @@ class Converter {
       }
 
       if ($elementType->isUserDefinedClass()) {
-
+        /**
+         * @var $elementType Type\UserDefinedType
+         */
+        $ret[] = self::convertUserDefinedClass($item, $elementType);
         continue;
       }
 
