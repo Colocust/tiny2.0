@@ -44,22 +44,19 @@ class Logger {
   }
 
   private function addLog(string $type, string $message): void {
-    //找到调用Logger的信息
     $backtrace = debug_backtrace();
     array_shift($backtrace);
 
-    //初始化调用Logger的文件
     $caller = '(' . $backtrace[0]['file'] . ':' . $backtrace[0]['line'] . ')';
 
-    //开始写入文件
     $file = fopen(self::$filePath, 'a');
-    fwrite($file, sprintf($this->makeMessage(), $type, $caller, $message));
+    fwrite($file, sprintf($this->makeMessage(), $type, $_SERVER['REQUEST_URI'] ?? null, $caller, $message));
     fclose($file);
   }
 
   private function makeMessage(): string {
     return Time::getCurrentMillSecondToString()
-      . " %s %s"
+      . " %s %s %s"
       . ' --- '
       . "%s"
       . PHP_EOL;
