@@ -12,26 +12,49 @@ use Tiny\Exception\ConverterException;
 class Converter {
 
   /**
-   * @param $from
+   * @param \stdClass $from
    * @param object $to
    * @throws ConverterException
    * @throws \ReflectionException
    */
-  public static function toObject($from, object $to): void {
+  public static function stdClassToObject(\stdClass $from, object $to): void {
     $reflectionClass = new \ReflectionClass($to);
+    self::toObject($reflectionClass, $from, $to);
+  }
+
+  /**
+   * @param object $from
+   * @return \stdClass
+   * @throws ConverterException
+   * @throws \ReflectionException
+   */
+  public static function objectToStdClass(object $from): \stdClass {
+    $to = new \stdClass();
+    $reflectionClass = new \ReflectionClass($from);
+    self::toObject($reflectionClass, $from, $to);
+    return $to;
+  }
+
+  /**
+   * @param \ReflectionClass $reflectionClass
+   * @param object $from
+   * @param object $to
+   * @throws ConverterException
+   */
+  private static function toObject(\ReflectionClass $reflectionClass, object $from, object $to): void {
     $reflectionProperties = $reflectionClass->getProperties();
 
     foreach ($reflectionProperties as $reflectionProperty) {
       $property = new Property($reflectionProperty);
-
       $value = $from->{$reflectionProperty->getName()};
+
       self::checkPropertyIsRight($value, $property);
 
       self::convert($value, $property, $to);
     }
   }
 
-  private static function convert($value, Property $property, object $to) {
+  private static function convert($value, Property $property, object $to): void {
     $type = $property->getType();
 
     if ($type->isArray()) {
@@ -78,7 +101,7 @@ class Converter {
         continue;
       }
 
-      $ret[] = $value;
+      $ret[] = $item;
     }
     return $ret;
   }
