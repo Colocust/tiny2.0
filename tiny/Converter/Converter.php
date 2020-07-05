@@ -15,10 +15,14 @@ class Converter {
    * @param \stdClass $from
    * @param object $to
    * @throws ConverterException
-   * @throws \ReflectionException
    */
-  public static function stdClassToObject(\stdClass $from, object $to): void {
-    $reflectionClass = new \ReflectionClass($to);
+  public static function toUserDefinedObject(\stdClass $from, object $to): void {
+    try {
+      $reflectionClass = new \ReflectionClass($to);
+    } catch (\ReflectionException $e) {
+      throw new ConverterException($e->getMessage());
+    }
+
     self::toObject($reflectionClass, $from, $to);
   }
 
@@ -26,11 +30,16 @@ class Converter {
    * @param object $from
    * @return \stdClass
    * @throws ConverterException
-   * @throws \ReflectionException
    */
-  public static function objectToStdClass(object $from): \stdClass {
+  public static function toStdClass(object $from): \stdClass {
+    try {
+      $reflectionClass = new \ReflectionClass($from);
+    } catch (\ReflectionException $e) {
+      throw new ConverterException($e->getMessage());
+    }
+
     $to = new \stdClass();
-    $reflectionClass = new \ReflectionClass($from);
+
     self::toObject($reflectionClass, $from, $to);
     return $to;
   }
@@ -49,6 +58,12 @@ class Converter {
       $value = $from->{$reflectionProperty->getName()};
 
       self::checkPropertyIsRight($value, $property);
+
+      if (is_null($value)) continue;
+
+      if (!self::checkTypeIsRight($value, $property->getType())) {
+        throw new ConverterException("变量 {$property->getName()} 类型错误");
+      }
 
       self::convert($value, $property, $to);
     }
@@ -106,11 +121,18 @@ class Converter {
     return $ret;
   }
 
+  /**
+   * @param object $value
+   * @param Type\UserDefinedType $type
+   * @return object
+   * @throws ConverterException
+   * @throws \ReflectionException
+   */
   private static function convertUserDefinedClass(object $value, Type\UserDefinedType $type): object {
     $reflectionClass = new \ReflectionClass($type->getTypeName());
     $instance = $reflectionClass->newInstanceWithoutConstructor();
 
-    self::toObject($value, $instance);
+    self::toUserDefinedObject($value, $instance);
     return $instance;
   }
 
@@ -136,10 +158,6 @@ class Converter {
 
     if (is_null($value) && $property->getUses()->isRequired()) {
       throw new ConverterException("变量 {$property->getName()} 为必传参数");
-    }
-
-    if (!self::checkTypeIsRight($value, $property->getType())) {
-      throw new ConverterException("变量 {$property->getName()} 类型错误");
     }
   }
 }

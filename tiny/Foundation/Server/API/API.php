@@ -26,7 +26,7 @@ abstract class API extends \Tiny\API {
     $this->request_ = $this->getRequestClass();
 
     try {
-      Converter::stdClassToObject($request->data, $this->request_);
+      Converter::toUserDefinedObject($request->data, $this->request_);
     } catch (ConverterException $e) {
       Logger::getInstance()->fatal($e->getMessage());
       $response->httpStatus = HttpStatus::ARGS_ERROR;
@@ -39,7 +39,7 @@ abstract class API extends \Tiny\API {
     }
 
     try {
-      $response->data = Converter::objectToStdClass($this->run());
+      $response->data = Converter::toStdClass($this->run());
     } catch (ConverterException $e) {
       Logger::getInstance()->fatal($e->getMessage());
       $response->httpStatus = HttpStatus::ARGS_ERROR;
