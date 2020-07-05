@@ -14,34 +14,10 @@ class Main {
 
   public function __construct() {
     ini_set('date.timezone', 'Asia/Shanghai');
-    ini_set('display_errors', 'Off');
+    ini_set('display_errors', 'On');
     error_reporting(E_ALL);
     $this->request_ = new Request();
     $this->response_ = new Response();
-  }
-
-  public function fpmGo() {
-    $this->request_->api = str_replace('/', '\\', $_SERVER['REQUEST_URI']);
-    $this->request_->data = file_get_contents("php://input");
-    $this->request_->method = $_SERVER['REQUEST_METHOD'];
-
-    $this->go();
-
-    if ($this->response_->httpStatus != HttpStatus::SUC) {
-      header("HTTP/1.1 " . $this->response_->httpStatus);
-      foreach ($this->response_->httpHeaders as $header => $value) {
-        header($header . ': ' . $value);
-      }
-      return;
-    }
-
-    foreach ($this->response_->httpHeaders as $header => $value) {
-      header($header . ': ' . $value);
-    }
-
-    if (isset($this->response_->data)) {
-      echo json_encode($this->response_->data);
-    }
   }
 
   private function go() {
@@ -68,6 +44,31 @@ class Main {
     } catch (\Exception $exception) {
       $this->response_->httpStatus = HttpStatus::FAILED;
       Logger::getInstance()->fatal("500 PHP Run Error", $exception);
+    } catch (\Error $error) {
+      $this->response_->httpStatus = HttpStatus::FAILED;
+      Logger::getInstance()->fatal("500 PHP Run Error", $error);
+    }
+  }
+
+  public function fpmGo() {
+    $this->request_->api = str_replace('/', '\\', $_SERVER['REQUEST_URI']);
+    $this->request_->data = file_get_contents("php://input");
+    $this->request_->method = $_SERVER['REQUEST_METHOD'];
+
+    $this->go();
+
+    foreach ($this->response_->httpHeaders as $header => $value) {
+      header($header . ': ' . $value);
+    }
+
+    if ($this->response_->httpStatus != HttpStatus::SUC) {
+      header("HTTP/1.1 " . $this->response_->httpStatus);
+
+      return;
+    }
+
+    if (isset($this->response_->data)) {
+      echo $this->response_->data;
     }
     Logger::getInstance()->info('end');
   }
