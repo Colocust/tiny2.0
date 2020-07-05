@@ -7,6 +7,4 @@ namespace Tiny\API;
 class Request {
   public $data;
   public $token;
-  public $api;
-  public $method;
 }

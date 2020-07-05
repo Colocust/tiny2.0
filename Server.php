@@ -29,21 +29,17 @@ class Server {
       $task->go();
       return 'Task FINISH';
     });
-
     $server->on('finish', function ($server, $taskId, $data) {
     });
-
     $server->on('request', function ($request, $response) {
       $main = new Main();
       $main->swooleGo($request, $response);
     });
-
     $server->on('WorkerStart', function ($server, $worker_id) {
       include_once __ROOT__ . '/tiny/Loader/Loader.php';
       include_once __ROOT__ . '/Config.php';
       Loader::register();
     });
-
     $server->on('message', [$this, 'onMessage']);
     $server->on('open', [$this, 'onOpen']);
     $server->on('close', [$this, 'onClose']);
