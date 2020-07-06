@@ -12,13 +12,11 @@ class Main {
   private $api_;
   private $data_;
 
-  public function __construct() {
+  private function go(): Response {
     ini_set('date.timezone', 'Asia/Shanghai');
     ini_set('display_errors', 'Off');
     error_reporting(E_ALL);
-  }
 
-  private function go(): Response {
     Logger::getInstance()->info('start');
     $response = new Response();
 
