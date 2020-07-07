@@ -6,7 +6,7 @@ namespace Tiny\Pool\Redis;
 use Tiny\Redis;
 use Tiny\Redis\Config;
 
-class RedisPool extends Redis {
+class RedisPool {
 
   public static $pool = [];
 
@@ -32,8 +32,8 @@ class RedisPool extends Redis {
   }
 
   private function __construct(Config $config) {
-    parent::__construct($config);
-    self::$pool[] = $this->db;
+    $redis = new Redis($config);
+    self::$pool[] = $redis->db;
   }
 
   private function __clone() {
