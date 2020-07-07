@@ -7,7 +7,7 @@ use Tiny\Redis\Config;
 
 class Redis {
 
-  protected function __construct(Config $config) {
+  public function __construct(Config $config) {
     $this->db = new \Redis();
     $res = $this->db->pconnect($config->host, $config->port, $config->timeout);
     if (!$res) {
@@ -16,5 +16,5 @@ class Redis {
     }
   }
 
-  protected $db;
+  public $db;
 }
