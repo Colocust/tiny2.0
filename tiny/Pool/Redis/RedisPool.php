@@ -32,8 +32,8 @@ class RedisPool {
   }
 
   private function __construct(Config $config) {
-    $redis = new Redis($config);
-    self::$pool[] = $redis->db;
+    $redis = Redis::New($config);
+    self::$pool[] = $redis->getDB();
   }
 
   private function __clone() {
