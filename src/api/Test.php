@@ -14,7 +14,7 @@ class Test extends JsonAPI {
 
   public $map = [];
 
-  protected function requestClass(): Request {
+  public function requestClass(): Request {
     return new TestRequest();
   }
 

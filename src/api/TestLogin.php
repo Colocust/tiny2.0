@@ -12,7 +12,7 @@ class TestLogin extends MultiClientLoginAPI {
 
   private $uid;
 
-  protected function requestClass(): Request {
+  public function requestClass(): Request {
     return new TestLoginRequest();
   }
 

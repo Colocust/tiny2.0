@@ -80,7 +80,7 @@ abstract class API extends \Tiny\API {
     }
   }
 
-  abstract protected function requestClass(): Request;
+  abstract public function requestClass(): Request;
 
   abstract protected function run(): Response;
 
@@ -113,7 +113,20 @@ abstract class API extends \Tiny\API {
     return $this->request_;
   }
 
-  public function getRequestClass(): Request {
-    return $this->requestClass();
+  public function responseClass(): Response {
+    $api = static::class;
+    $class = $api . 'Response';
+
+    try {
+      $reflectionClass = new \ReflectionClass($class);
+    } catch (\ReflectionException $e) {
+      throw new \Exception("API $api 未找到Response类");
+    }
+    /**
+     * @var $responseClass Response
+     */
+    $responseClass = $reflectionClass->newInstanceWithoutConstructor();
+
+    return $responseClass;
   }
 }
