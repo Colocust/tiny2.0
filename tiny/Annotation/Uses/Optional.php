@@ -15,4 +15,8 @@ class Optional implements Uses {
   function isOptional(): bool {
     return true;
   }
+
+  function getName(): string {
+    return 'Optional';
+  }
 }
