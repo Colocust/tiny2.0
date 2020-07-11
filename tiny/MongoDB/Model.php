@@ -8,12 +8,10 @@ use MongoDB\Driver\BulkWrite;
 use MongoDB\Driver\Cursor;
 use MongoDB\Driver\Exception\BulkWriteException;
 use MongoDB\Driver\Query;
+use Tiny\Converter;
 use Tiny\Logger;
 
 abstract class Model {
-  /**
-   * @var MongoDB
-   */
   protected $db_;
 
   public function __construct(Config $config) {
@@ -23,8 +21,8 @@ abstract class Model {
   abstract public function getCollection(): string;
 
   protected function find(Filter $filter, ?QueryOptions $queryOptions = null): Cursor {
-    return $this->db_->getManager()->executeQuery($this->db_->getNs(), new Query($filter->getFilter(),
-      $queryOptions ? $queryOptions->getQueryOptions() : []));
+    return $this->db_->getManager()->executeQuery($this->db_->getNs(),
+      new Query($filter->getFilter(), $queryOptions->getQueryOptions() ?? []));
   }
 
   protected function update(Filter $filter, NewObject $newObject): bool {
@@ -82,8 +80,10 @@ abstract class Model {
   }
 
   protected function insert(Info $info): bool {
+    $document = Converter::toStdClass($info);
+
     $bulk = new BulkWrite();
-    $bulk->insert($info->toArray());
+    $bulk->insert($document);
     try {
       $this->db_->getManager()->executeBulkWrite($this->db_->getNs(), $bulk);
       return true;
