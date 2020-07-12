@@ -3,6 +3,7 @@
 namespace Tiny;
 
 require_once 'tiny/Loader/Loader.php';
+require_once __ROOT__ . '/Config.php';
 
 define('__ROOT__', __DIR__);
 
