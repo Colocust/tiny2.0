@@ -1,38 +1,57 @@
 <?php declare(strict_types=1);
 
 
-namespace Tiny\Algorithm;
+namespace Tiny\Algorithm\Linear;
 
 
 use Tiny\Exception\AlgorithmException;
 
-class Queue {
-  private $queue;
-  private $size;
+class Queue extends LinkedList {
+  /**
+   * @var Node
+   */
+
+  private $tail;
 
   public function __construct() {
-    $this->queue = [];
-    $this->size = 0;
+    $this->tail = null;
+    parent::__construct();
   }
 
-  public function enQueue($value): void {
-    array_push($this->queue, $value);
+  public function enQueue($element): void {
     $this->size++;
+
+    if (is_null($this->tail)) {
+      $this->tail = new Node($element);
+      $this->dummyHead->next = $this->tail;
+      return;
+    }
+
+    $this->tail->next = new Node($element);
+    $this->tail = $this->tail->next;
   }
 
   public function deQueue() {
     if ($this->isEmpty()) {
-      throw new AlgorithmException('queue is empty');
+      throw new AlgorithmException('Empty Queue');
     }
+
+    $node = $this->dummyHead->next;
+    $this->dummyHead->next = $node->next;
+
+    if (is_null($this->dummyHead->next)) {
+      $this->tail = null;
+    }
+
     $this->size--;
-    return array_shift($this->queue);
+    return $node->element;
   }
 
   public function getFront() {
     if ($this->isEmpty()) {
-      throw new AlgorithmException('queue is empty');
+      throw new AlgorithmException('Empty Queue');
     }
-    return $this->queue[0];
+    return $this->get(0);
   }
 
   public function isEmpty(): bool {
@@ -42,9 +61,4 @@ class Queue {
   public function getSize(): int {
     return $this->size;
   }
-
-  public function getQueue(): array {
-    return $this->queue;
-  }
-
 }
