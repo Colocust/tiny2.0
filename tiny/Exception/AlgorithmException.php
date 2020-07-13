@@ -3,7 +3,11 @@
 
 namespace Tiny\Exception;
 
+use Throwable;
+use Tiny\API\HttpStatus;
 
-class Algorithm {
-
+class AlgorithmException extends \Exception {
+  public function __construct($message, int $code = HttpStatus::FAILED, Throwable $previous = null) {
+    parent::__construct($message, $code, $previous);
+  }
 }

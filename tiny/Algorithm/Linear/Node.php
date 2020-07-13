@@ -4,6 +4,6 @@
 namespace Tiny\Algorithm;
 
 
-class Queue {
+class Node {
 
 }

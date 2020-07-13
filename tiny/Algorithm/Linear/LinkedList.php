@@ -4,6 +4,6 @@
 namespace Tiny\Algorithm;
 
 
-class Stack {
+class LinkedList {
 
 }
