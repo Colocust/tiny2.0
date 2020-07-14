@@ -4,13 +4,13 @@ namespace Tiny;
 
 
 use Tiny\Annotation\File;
+use Tiny\Http\API;
 
 require_once "tiny/Helper/Time.php";
 require_once "tiny/Loader/Loader.php";
 require_once "tiny/Annotation/File.php";
 
 use Tiny\Annotation\Property;
-use Tiny\Foundation\Server\API;
 
 Loader::register();
 
