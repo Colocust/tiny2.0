@@ -1,6 +1,6 @@
 <?php
 
-namespace Tiny\Foundation\Server;
+namespace Tiny\Http;
 
 
 class Code {

@@ -1,11 +1,12 @@
 <?php declare(strict_types=1);
 
 
-namespace Tiny\Foundation\Server\Logout;
+namespace Tiny\Http\Logout;
 
 
-use Tiny\Foundation\Server\JsonAPI;
-use Tiny\Foundation\Server\Response;
+
+use Tiny\Http\JsonAPI;
+use Tiny\Http\Response;
 
 abstract class LogoutAPI extends JsonAPI {
 

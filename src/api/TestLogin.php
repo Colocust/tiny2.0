@@ -4,9 +4,10 @@
 namespace API;
 
 
-use Tiny\Foundation\Server\Login\LoginAPIResponse;
-use Tiny\Foundation\Server\Login\MultiClientLoginAPI;
-use Tiny\Foundation\Server\Request;
+
+use Tiny\Http\Login\LoginAPIResponse;
+use Tiny\Http\Login\MultiClientLoginAPI;
+use Tiny\Http\Request;
 
 class TestLogin extends MultiClientLoginAPI {
 

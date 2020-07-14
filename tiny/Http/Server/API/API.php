@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 
-namespace Tiny\Foundation\Server;
+namespace Tiny\Http;
 
 
 use Tiny\API\HttpStatus;
@@ -23,7 +23,7 @@ abstract class API extends \Tiny\API {
   private $parseStrategy_;
 
   protected function go(\Tiny\API\Request $request, \Tiny\API\Response $response) {
-    $this->request_ = $this->getRequestClass();
+    $this->request_ = $this->requestClass();
 
     try {
       Converter::toUserDefinedObject($request->data, $this->request_);

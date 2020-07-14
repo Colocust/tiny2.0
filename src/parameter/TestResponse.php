@@ -4,7 +4,8 @@
 namespace API;
 
 
-use Tiny\Foundation\Server\Response;
+
+use Tiny\Http\Response;
 
 class TestResponse extends Response {
   /**

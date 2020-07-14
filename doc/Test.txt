@@ -1,0 +1,11 @@
+URL: API\Test
+
+API\TestRequest {
+   id : string @Required
+} 
+
+API\TestResponse {
+   result : int @Optional
+   code : int @Required
+} 
+

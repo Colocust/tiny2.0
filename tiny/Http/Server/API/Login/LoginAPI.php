@@ -1,12 +1,13 @@
 <?php declare(strict_types=1);
 
 
-namespace Tiny\Foundation\Server\Login;
+namespace Tiny\Http\Login;
 
 
-use Tiny\Foundation\Server\Code;
-use Tiny\Foundation\Server\JsonAPI;
-use Tiny\Foundation\Server\Response;
+
+use Tiny\Http\Code;
+use Tiny\Http\JsonAPI;
+use Tiny\Http\Response;
 use Tiny\Logger;
 use Tiny\Net;
 

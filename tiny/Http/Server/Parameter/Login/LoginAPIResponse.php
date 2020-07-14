@@ -1,10 +1,11 @@
 <?php declare(strict_types=1);
 
 
-namespace Tiny\Foundation\Server\Login;
+namespace Tiny\Http\Login;
 
 
-use Tiny\Foundation\Server\Response;
+
+use Tiny\Http\Response;
 
 class LoginAPIResponse extends Response {
   /**

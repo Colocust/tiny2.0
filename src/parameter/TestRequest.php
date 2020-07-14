@@ -4,7 +4,8 @@
 namespace API;
 
 
-use Tiny\Foundation\Server\Request;
+
+use Tiny\Http\Request;
 
 class TestRequest extends Request {
   /**

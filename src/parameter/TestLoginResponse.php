@@ -4,7 +4,8 @@
 namespace API;
 
 
-use Tiny\Foundation\Server\Login\LoginAPIResponse;
+
+use Tiny\Http\Login\LoginAPIResponse;
 
 class TestLoginResponse extends LoginAPIResponse {
   /**

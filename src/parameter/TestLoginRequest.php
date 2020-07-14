@@ -4,7 +4,8 @@
 namespace API;
 
 
-use Tiny\Foundation\Server\Login\LoginAPIRequest;
+
+use Tiny\Http\Login\LoginAPIRequest;
 
 class TestLoginRequest extends LoginAPIRequest {
   /**

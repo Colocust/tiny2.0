@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 
-namespace Tiny\Foundation\Client;
+namespace Tiny\Http\Client;
 
 
 interface CurlHttp {

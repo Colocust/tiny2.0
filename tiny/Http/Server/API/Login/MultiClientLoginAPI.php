@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 
-namespace Tiny\Foundation\Server\Login;
+namespace Tiny\Http\Login;
 
 
 abstract class MultiClientLoginAPI extends LoginAPI {

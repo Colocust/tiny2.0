@@ -1,10 +1,11 @@
 <?php declare(strict_types=1);
 
 
-namespace Tiny\Foundation\Server\Logout;
+namespace Tiny\Http\Logout;
 
 
-use Tiny\Foundation\Server\Response;
+
+use Tiny\Http\Response;
 
 class LogoutAPIResponse extends Response {
 

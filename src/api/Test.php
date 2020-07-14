@@ -5,9 +5,9 @@ namespace API;
 
 
 use Enum\ResultEnum;
-use Tiny\Foundation\Server\JsonAPI;
-use Tiny\Foundation\Server\Request;
-use Tiny\Foundation\Server\Response;
+use Tiny\Http\JsonAPI;
+use Tiny\Http\Request;
+use Tiny\Http\Response;
 
 
 class Test extends JsonAPI {
