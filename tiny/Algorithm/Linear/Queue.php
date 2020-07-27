@@ -20,7 +20,7 @@ class Queue extends LinkedList {
   public function enQueue($element): void {
     $this->size++;
 
-    if ($this->isEmpty()) {
+    if (is_null($this->tail)) {
       $this->tail = new LinkedListNode($element);
       $this->dummyHead->next = $this->tail;
       return;
@@ -56,4 +56,5 @@ class Queue extends LinkedList {
   public function isEmpty(): bool {
     return $this->size === 0;
   }
+
 }
