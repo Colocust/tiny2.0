@@ -8,9 +8,8 @@ use Tiny\Exception\AlgorithmException;
 
 class Queue extends LinkedList {
   /**
-   * @var Node
+   * @var $tail LinkedListNode
    */
-
   private $tail;
 
   public function __construct() {
@@ -21,44 +20,40 @@ class Queue extends LinkedList {
   public function enQueue($element): void {
     $this->size++;
 
-    if (is_null($this->tail)) {
-      $this->tail = new Node($element);
+    if ($this->isEmpty()) {
+      $this->tail = new LinkedListNode($element);
       $this->dummyHead->next = $this->tail;
       return;
     }
 
-    $this->tail->next = new Node($element);
+    $this->tail->next = new LinkedListNode($element);
     $this->tail = $this->tail->next;
   }
 
   public function deQueue() {
     if ($this->isEmpty()) {
-      throw new AlgorithmException('Empty Queue');
+      throw new AlgorithmException('Queue is empty');
     }
+    $this->size--;
 
-    $node = $this->dummyHead->next;
-    $this->dummyHead->next = $node->next;
+    $next = $this->dummyHead->next;
+    $this->dummyHead->next = $next->next;
 
     if (is_null($this->dummyHead->next)) {
       $this->tail = null;
     }
 
-    $this->size--;
-    return $node->element;
+    return $next->element;
   }
 
   public function getFront() {
     if ($this->isEmpty()) {
-      throw new AlgorithmException('Empty Queue');
+      throw new AlgorithmException('Queue is empty');
     }
     return $this->get(0);
   }
 
   public function isEmpty(): bool {
-    return $this->size == 0;
-  }
-
-  public function getSize(): int {
-    return $this->size;
+    return $this->size === 0;
   }
 }

@@ -3,6 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="97eea35c-b950-4e1b-8572-17c938ae5d3e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/__ClassLoader__.php" beforeDir="false" afterPath="$PROJECT_DIR$/__ClassLoader__.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiny/Algorithm/Linear/LinkedList.php" beforeDir="false" afterPath="$PROJECT_DIR$/tiny/Algorithm/Linear/LinkedList.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiny/Algorithm/Linear/Node.php" beforeDir="false" afterPath="$PROJECT_DIR$/tiny/Algorithm/Linear/LinkedListNode.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tiny/Algorithm/Linear/Queue.php" beforeDir="false" afterPath="$PROJECT_DIR$/tiny/Algorithm/Linear/Queue.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,6 +161,12 @@
       <workItem from="1594622507577" duration="206000" />
       <workItem from="1594635817438" duration="2314000" />
       <workItem from="1594711093737" duration="7000" />
+      <workItem from="1594786874515" duration="213000" />
+      <workItem from="1594791564457" duration="1075000" />
+      <workItem from="1594957324867" duration="191000" />
+      <workItem from="1594957549865" duration="364000" />
+      <workItem from="1595469945893" duration="83000" />
+      <workItem from="1595813533812" duration="1030000" />
     </task>
     <servers />
   </component>
@@ -181,11 +191,12 @@
     <state x="533" y="117" key="#com.intellij.ide.util.MemberChooser/0.23.1440.797/1440.23.1920.1057@0.23.1440.797" timestamp="1594345193443" />
     <state x="533" y="117" key="#com.intellij.ide.util.MemberChooser/0.23.1440.801@0.23.1440.801" timestamp="1593781112812" />
     <state x="533" y="118" key="#com.intellij.ide.util.MemberChooser/0.23.1440.806/1440.23.1920.1057@0.23.1440.806" timestamp="1591414234437" />
-    <state x="490" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1594474802421">
-      <screen x="0" y="23" width="1440" height="797" />
+    <state x="2093" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1595814215257">
+      <screen x="1440" y="23" width="1920" height="1057" />
     </state>
     <state x="523" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1590574381325" />
     <state x="523" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1589080573829" />
+    <state x="2093" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.23.1440.797/1440.23.1920.1057@1440.23.1920.1057" timestamp="1595814215257" />
     <state x="490" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.23.1440.797@0.23.1440.797" timestamp="1594474802421" />
     <state x="490" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.23.1440.801@0.23.1440.801" timestamp="1593780990126" />
     <state x="468" y="177" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1594193768226">
@@ -237,6 +248,10 @@
     </state>
     <state x="321" y="15" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1588996903092" />
     <state x="321" y="15" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" timestamp="1588950268482" />
+    <state x="2215" y="473" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1595814407872">
+      <screen x="1440" y="23" width="1920" height="1057" />
+    </state>
+    <state x="2215" y="473" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.797/1440.23.1920.1057@1440.23.1920.1057" timestamp="1595814407872" />
     <state x="425" y="187" key="run.anything.popup" timestamp="1589102721816">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

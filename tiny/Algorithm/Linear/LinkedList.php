@@ -9,7 +9,7 @@ class LinkedList {
   protected $size;
 
   public function __construct() {
-    $this->dummyHead = new Node(null);
+    $this->dummyHead = new LinkedListNode(null);
     $this->size = 0;
   }
 
@@ -23,7 +23,7 @@ class LinkedList {
       $prev = $prev->next;
     }
 
-    $prev->next = new Node($element, $prev->next);
+    $prev->next = new LinkedListNode($element, $prev->next);
     $this->size++;
   }
 
@@ -78,7 +78,7 @@ class LinkedList {
     return false;
   }
 
-  public function remove(int $index): Node {
+  public function remove(int $index): LinkedListNode {
     if ($index < 0 || $index >= $this->size) {
       throw new \Exception('wrong index');
     }
@@ -94,11 +94,11 @@ class LinkedList {
     return $ret;
   }
 
-  public function removeFirst(): Node {
+  public function removeFirst(): LinkedListNode {
     return $this->remove(0);
   }
 
-  public function removeLast(): Node {
+  public function removeLast(): LinkedListNode {
     return $this->remove($this->size - 1);
   }
 
