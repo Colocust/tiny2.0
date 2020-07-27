@@ -2,6 +2,8 @@
 
 namespace Tiny\Algorithm\Tree;
 
+use Tiny\Algorithm\Linear\Queue;
+use Tiny\Algorithm\Linear\Stack;
 use Tiny\Exception\AlgorithmException;
 
 class BST {
@@ -161,5 +163,93 @@ class BST {
     $node->right = null;
 
     return $min;
+  }
+
+  public function preOrder(BSTNode $node): array {
+    $results = [];
+
+    $results[] = $node->element;
+    if ($node->left) {
+      $results = array_merge($results, $this->preOrder($node->left));
+    }
+    if ($node->right) {
+      $results = array_merge($results, $this->preOrder($node->right));
+    }
+
+    return $results;
+  }
+
+  public function inOrder(BSTNode $node): array {
+    $results = [];
+
+    if ($node->left) {
+      $results = array_merge($results, $this->inOrder($node->left));
+    }
+    $results[] = $node->element;
+    if ($node->right) {
+      $results = array_merge($results, $this->inOrder($node->right));
+    }
+
+    return $results;
+  }
+
+  public function postOrder(BSTNode $node): array {
+    $results = [];
+
+    if ($node->left) {
+      $results = array_merge($results, $this->postOrder($node->left));
+    }
+    if ($node->right) {
+      $results = array_merge($results, $this->postOrder($node->right));
+    }
+    $results[] = $node->element;
+
+    return $results;
+  }
+
+  public function BFS(BSTNode $node): array {
+    $results = [];
+
+    $stack = new Stack();
+    $stack->push($node);
+    while (!$stack->isEmpty()) {
+      /**
+       * @var $pop BSTNode
+       */
+      $pop = $stack->pop();
+      $results[] = $pop->element;
+      if ($pop->right) {
+        $stack->push($pop->right);
+      }
+      if ($pop->left) {
+        $stack->push($pop->left);
+      }
+    }
+
+    return $results;
+  }
+
+  public function DFS(BSTNode $node): array {
+    $results = [];
+
+    $queue = new Queue();
+    $queue->enQueue($node);
+
+    while (!$queue->isEmpty()) {
+      /**
+       * @var $deQueue BSTNode
+       */
+      $deQueue = $queue->deQueue();
+
+      $results[] = $deQueue->element;
+      if ($deQueue->left) {
+        $queue->enQueue($deQueue->left);
+      }
+      if ($deQueue->right) {
+        $queue->enQueue($deQueue->right);
+      }
+    }
+
+    return $results;
   }
 }
