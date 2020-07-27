@@ -6,36 +6,39 @@ namespace Tiny\Algorithm\Linear;
 
 use Tiny\Exception\AlgorithmException;
 
-class Stack {
-  private $stack;
-  private $size;
+class Stack extends LinkedList {
 
   public function __construct() {
-    $this->stack = [];
-    $this->size = 0;
+    parent::__construct();
+  }
+
+  public function push($element): void {
+    $next = $this->dummyHead->next;
+    $node = new LinkedListNode($element);
+    $this->dummyHead->next = $node;
+    $node->next = $next;
+
+    $this->size++;
   }
 
   public function pop() {
     if ($this->isEmpty()) {
-      throw new AlgorithmException('Empty Stack');
+      throw new AlgorithmException('Stack is empty');
     }
-    $ret = array_pop($this->stack);
     $this->size--;
-    return $ret;
-  }
 
-  public function push($element): void {
-    array_push($this->stack, $element);
-    $this->size++;
+    $pop = $this->dummyHead->next;
+    $this->dummyHead->next = $pop->next;
+
+    return $pop->element;
   }
 
   public function peek() {
     if ($this->isEmpty()) {
-      throw new \Exception();
+      throw new AlgorithmException('Stack is empty');
     }
-    return $this->stack[$this->size - 1];
+    return $this->get(0);
   }
-
 
   public function isEmpty(): bool {
     return $this->size == 0;
@@ -44,5 +47,6 @@ class Stack {
   public function getSize(): int {
     return $this->size;
   }
+
 }
 
