@@ -5,9 +5,9 @@ namespace Tiny\Algorithm\Tree;
 
 
 class Node {
+  public $key;
   public $left;
   public $right;
-  public $key;
 
   public function __construct($key) {
     $this->key = $key;
