@@ -4,6 +4,6 @@
 namespace Tiny\Algorithm\Tree;
 
 
-class BSTNode extends Node {
+class AVL {
 
 }

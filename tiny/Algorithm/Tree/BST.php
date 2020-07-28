@@ -36,10 +36,10 @@ class BST {
       $this->size++;
       return new BSTNode($element);
     }
-    if ($node->element > $element) {
+    if ($node->key > $element) {
       $node->left = $this->addNode($element, $node->left);
     }
-    if ($node->element < $element) {
+    if ($node->key < $element) {
       $node->right = $this->addNode($element, $node->right);
     }
     return $node;
@@ -50,10 +50,10 @@ class BST {
       return false;
     }
 
-    if ($node->element > $element) {
+    if ($node->key > $element) {
       return $this->contains($element, $node->left);
     }
-    if ($node->element < $element) {
+    if ($node->key < $element) {
       return $this->contains($element, $node->right);
     }
     return true;
@@ -63,7 +63,7 @@ class BST {
     if ($this->isEmpty()) {
       throw new AlgorithmException('BST is empty');
     }
-    return $this->minNode($this->root)->element;
+    return $this->minNode($this->root)->key;
   }
 
   private function minNode(BSTNode $node): BSTNode {
@@ -77,7 +77,7 @@ class BST {
     if ($this->isEmpty()) {
       throw new AlgorithmException('BST is empty');
     }
-    return $this->maxNode($this->root)->element;
+    return $this->maxNode($this->root)->key;
   }
 
   private function maxNode(BSTNode $node): BSTNode {
@@ -132,12 +132,12 @@ class BST {
       return null;
     }
 
-    if ($node->element > $element) {
+    if ($node->key > $element) {
       $node->left = $this->removeNode($element, $node->left);
       return $node;
     }
 
-    if ($node->element < $element) {
+    if ($node->key < $element) {
       $node->right = $this->removeNode($element, $node->right);
       return $node;
     }
@@ -168,7 +168,7 @@ class BST {
   public function preOrder(BSTNode $node): array {
     $results = [];
 
-    $results[] = $node->element;
+    $results[] = $node->key;
     if ($node->left) {
       $results = array_merge($results, $this->preOrder($node->left));
     }
@@ -185,7 +185,7 @@ class BST {
     if ($node->left) {
       $results = array_merge($results, $this->inOrder($node->left));
     }
-    $results[] = $node->element;
+    $results[] = $node->key;
     if ($node->right) {
       $results = array_merge($results, $this->inOrder($node->right));
     }
@@ -202,7 +202,7 @@ class BST {
     if ($node->right) {
       $results = array_merge($results, $this->postOrder($node->right));
     }
-    $results[] = $node->element;
+    $results[] = $node->key;
 
     return $results;
   }
@@ -217,7 +217,7 @@ class BST {
        * @var $pop BSTNode
        */
       $pop = $stack->pop();
-      $results[] = $pop->element;
+      $results[] = $pop->key;
       if ($pop->right) {
         $stack->push($pop->right);
       }
@@ -241,7 +241,7 @@ class BST {
        */
       $deQueue = $queue->deQueue();
 
-      $results[] = $deQueue->element;
+      $results[] = $deQueue->key;
       if ($deQueue->left) {
         $queue->enQueue($deQueue->left);
       }
