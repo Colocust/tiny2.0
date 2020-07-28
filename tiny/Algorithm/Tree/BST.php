@@ -27,68 +27,82 @@ class BST {
     return $this->size;
   }
 
-  public function add($element): void {
-    $this->root = $this->addNode($element, $this->root);
+  public function getNode($key, ?BSTNode $node): ?BSTNode {
+    if (is_null($node)) {
+      return null;
+    }
+
+    if ($node->key == $key) {
+      return $node;
+    }
+    if ($node->key > $key) {
+      return $this->getNode($key, $node->left);
+    }
+    return $this->getNode($key, $node->right);
   }
 
-  private function addNode($element, BSTNode $node = null): BSTNode {
+  public function add($key): void {
+    $this->root = $this->addNode($key, $this->root);
+  }
+
+  private function addNode($key, ?BSTNode $node): BSTNode {
     if (is_null($node)) {
       $this->size++;
-      return new BSTNode($element);
+      return new BSTNode($key);
     }
-    if ($node->key > $element) {
-      $node->left = $this->addNode($element, $node->left);
+    if ($node->key > $key) {
+      $node->left = $this->addNode($key, $node->left);
     }
-    if ($node->key < $element) {
-      $node->right = $this->addNode($element, $node->right);
+    if ($node->key < $key) {
+      $node->right = $this->addNode($key, $node->right);
     }
     return $node;
   }
 
-  public function contains($element, BSTNode $node = null): bool {
+  public function contains($key, ?BSTNode $node): bool {
     if (is_null($node)) {
       return false;
     }
 
-    if ($node->key > $element) {
-      return $this->contains($element, $node->left);
+    if ($node->key > $key) {
+      return $this->contains($key, $node->left);
     }
-    if ($node->key < $element) {
-      return $this->contains($element, $node->right);
+    if ($node->key < $key) {
+      return $this->contains($key, $node->right);
     }
     return true;
   }
 
-  public function minElement() {
+  public function min() {
     if ($this->isEmpty()) {
       throw new AlgorithmException('BST is empty');
     }
     return $this->minNode($this->root)->key;
   }
 
-  private function minNode(BSTNode $node): BSTNode {
+  protected function minNode(BSTNode $node): BSTNode {
     if (is_null($node->left)) {
       return $node;
     }
     return $this->minNode($node->left);
   }
 
-  public function maxElement() {
+  public function max() {
     if ($this->isEmpty()) {
       throw new AlgorithmException('BST is empty');
     }
     return $this->maxNode($this->root)->key;
   }
 
-  private function maxNode(BSTNode $node): BSTNode {
+  protected function maxNode(BSTNode $node): BSTNode {
     if (is_null($node->right)) {
       return $node;
     }
     return $this->maxNode($node->right);
   }
 
-  public function removeMinElement() {
-    $min = $this->minElement();
+  public function removeMin() {
+    $min = $this->min();
     $this->root = $this->removeMinNode($this->root);
     return $min;
   }
@@ -105,8 +119,8 @@ class BST {
     return $node;
   }
 
-  public function removeMaxElement() {
-    $max = $this->maxElement();
+  public function removeMax() {
+    $max = $this->max();
     $this->root = $this->removeMaxNode($this->root);
     return $max;
   }
@@ -123,22 +137,22 @@ class BST {
     return $node;
   }
 
-  public function remove($element): void {
-    $this->root = $this->removeNode($element, $this->root);
+  public function remove($key): void {
+    $this->root = $this->removeNode($key, $this->root);
   }
 
-  private function removeNode($element, BSTNode $node = null): ?BSTNode {
+  private function removeNode($key, ?BSTNode $node): ?BSTNode {
     if (is_null($node)) {
       return null;
     }
 
-    if ($node->key > $element) {
-      $node->left = $this->removeNode($element, $node->left);
+    if ($node->key > $key) {
+      $node->left = $this->removeNode($key, $node->left);
       return $node;
     }
 
-    if ($node->key < $element) {
-      $node->right = $this->removeNode($element, $node->right);
+    if ($node->key < $key) {
+      $node->right = $this->removeNode($key, $node->right);
       return $node;
     }
 

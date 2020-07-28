@@ -4,13 +4,13 @@
 namespace Tiny\Algorithm\Tree;
 
 
-class BSTNode {
+class Node {
   public $left;
   public $right;
-  public $element;
+  public $key;
 
-  public function __construct($element) {
-    $this->element = $element;
+  public function __construct($key) {
+    $this->key = $key;
     $this->left = null;
     $this->right = null;
   }
