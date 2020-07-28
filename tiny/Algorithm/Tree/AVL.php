@@ -76,10 +76,10 @@ class AVL extends BST {
       return $this->leftRotate($node);
     }
     //左右旋转
-    //           y                           x
-    //        x    T3    右旋转            z     y
-    //      z  T2      =========>       T1    T2 T3
-    //           T1
+    //           z                          z                            x
+    //        y    T3    左旋转           x     T3        右旋转         y    z
+    //      T1  x      =========>     y                ======>      T1  T2   T3
+    //        T2                    T1 T2
     if ($balanceFactor > 1 && $this->getBalanceFactor($node->left) < 0) {
       $node->left = $this->leftRotate($node->left);
       return $this->rightRotate($node);
@@ -90,6 +90,7 @@ class AVL extends BST {
     //          x  T3    ==========>         T2   y       =========>      T1 T2    T3
     //        T2                                   T3
     if ($balanceFactor < -1 && $this->getBalanceFactor($node->right) > 0) {
+      $node->right = $this->rightRotate($node->right);
       return $this->leftRotate($node);
     }
     return $node;
