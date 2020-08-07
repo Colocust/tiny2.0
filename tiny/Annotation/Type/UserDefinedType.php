@@ -8,7 +8,7 @@ use Tiny\Annotation\Type;
 
 class UserDefinedType extends Type {
 
-  public function isUserDefinedClass(): bool {
-    return true;
-  }
+    public function isUserDefinedClass(): bool {
+        return true;
+    }
 }

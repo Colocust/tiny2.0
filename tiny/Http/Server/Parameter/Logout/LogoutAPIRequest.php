@@ -4,7 +4,6 @@
 namespace Tiny\Http\Logout;
 
 
-
 use Tiny\Http\Request;
 
 class LogoutAPIRequest extends Request {

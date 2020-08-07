@@ -6,8 +6,8 @@ namespace Tiny;
 
 class TaskCenter {
 
-  public static function post(Task $task) {
-    $GLOBALS['WEBSOCKET_SERVER']->task($task);
-  }
+    public static function post(Task $task) {
+        $GLOBALS['WEBSOCKET_SERVER']->task($task);
+    }
 
 }

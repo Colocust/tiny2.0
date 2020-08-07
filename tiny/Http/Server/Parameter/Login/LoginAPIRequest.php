@@ -4,7 +4,6 @@
 namespace Tiny\Http\Login;
 
 
-
 use Tiny\Http\Request;
 
 class LoginAPIRequest extends Request {

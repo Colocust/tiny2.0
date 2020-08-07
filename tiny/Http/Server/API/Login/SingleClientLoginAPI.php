@@ -6,8 +6,8 @@ namespace Tiny\Http\Login;
 
 abstract class SingleClientLoginAPI extends LoginAPI {
 
-  protected function isSupportMultiClient(): bool {
-    return false;
-  }
+    protected function isSupportMultiClient(): bool {
+        return false;
+    }
 
 }

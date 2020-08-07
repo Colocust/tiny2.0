@@ -5,5 +5,5 @@ namespace Tiny;
 
 
 abstract class Task {
-  abstract public function go();
+    abstract public function go();
 }

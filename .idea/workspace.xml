@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="97eea35c-b950-4e1b-8572-17c938ae5d3e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/Test.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/Test.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tiny/Algorithm/Tree/AVL.php" beforeDir="false" afterPath="$PROJECT_DIR$/tiny/Algorithm/Tree/AVL.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tiny/Algorithm/Tree/AVLNode.php" beforeDir="false" afterPath="$PROJECT_DIR$/tiny/Algorithm/Tree/AVLNode.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tiny/Algorithm/Tree/Node.php" beforeDir="false" afterPath="$PROJECT_DIR$/tiny/Algorithm/Tree/Node.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,7 +164,10 @@
       <workItem from="1595469945893" duration="83000" />
       <workItem from="1595813533812" duration="18630000" />
       <workItem from="1595851891487" duration="1963000" />
-      <workItem from="1595899105722" duration="7244000" />
+      <workItem from="1595899105722" duration="11841000" />
+      <workItem from="1596090054956" duration="4383000" />
+      <workItem from="1596159413906" duration="598000" />
+      <workItem from="1596450204419" duration="23000" />
     </task>
     <servers />
   </component>

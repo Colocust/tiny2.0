@@ -4,13 +4,12 @@
 namespace API;
 
 
-
 use Tiny\Http\Login\LoginAPIRequest;
 
 class TestLoginRequest extends LoginAPIRequest {
-  /**
-   * @var string
-   * @uses \Tiny\Annotation\Uses\Required
-   */
-  public $uid;
+    /**
+     * @var string
+     * @uses \Tiny\Annotation\Uses\Required
+     */
+    public $uid;
 }

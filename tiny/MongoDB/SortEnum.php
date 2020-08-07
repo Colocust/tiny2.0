@@ -7,6 +7,6 @@ namespace Tiny\MongoDB;
 use Tiny\Enum\Enum;
 
 class SortEnum extends Enum {
-  const ASC = 1;
-  const DESC = -1;
+    const ASC = 1;
+    const DESC = -1;
 }

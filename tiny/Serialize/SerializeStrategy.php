@@ -4,7 +4,7 @@ namespace Tiny\Serialize;
 
 
 interface SerializeStrategy {
-  function encode(object $object): string;
+    public function encode(object $object): string;
 
-  function decode(string $string): \stdClass;
+    public function decode(string $string): \stdClass;
 }

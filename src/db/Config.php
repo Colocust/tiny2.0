@@ -7,8 +7,8 @@ namespace TinyDB;
 use Tiny\OperationConfig;
 
 interface Config extends OperationConfig {
-  const URI = '';
-  const USER = '';
-  const PASSWORD = '';
-  const DBNAME = '';
+    const URI = '';
+    const USER = '';
+    const PASSWORD = '';
+    const DBNAME = '';
 }

@@ -8,15 +8,15 @@ use Tiny\Annotation\Uses;
 
 class Optional implements Uses {
 
-  function isRequired(): bool {
-    return false;
-  }
+    public function isRequired(): bool {
+        return false;
+    }
 
-  function isOptional(): bool {
-    return true;
-  }
+    public function isOptional(): bool {
+        return true;
+    }
 
-  function getName(): string {
-    return 'Optional';
-  }
+    public function getName(): string {
+        return 'Optional';
+    }
 }

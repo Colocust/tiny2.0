@@ -8,35 +8,35 @@ use Tiny\Redis\Config;
 
 class RedisPool {
 
-  public static $pool = [];
+    public static $pool = [];
 
-  public static function get(string $host, int $port): \Redis {
-    $key = self::generateKey($host, $port);
+    public static function get(string $host, int $port): \Redis {
+        $key = self::generateKey($host, $port);
 
-    $redis = @self::$pool[$key];
-    if (is_null($redis)) {
-      new static(new Config($host, $port));
+        $redis = @self::$pool[$key];
+        if (is_null($redis)) {
+            new static(new Config($host, $port));
+        }
+
+        unset(self::$pool[$key]);
+        return $redis;
     }
 
-    unset(self::$pool[$key]);
-    return $redis;
-  }
+    public static function return(string $host, int $port, \Redis $redis) {
+        $key = self::generateKey($host, $port);
+        self::$pool[$key] = $redis;
+    }
 
-  public static function return(string $host, int $port, \Redis $redis) {
-    $key = self::generateKey($host, $port);
-    self::$pool[$key] = $redis;
-  }
+    private static function generateKey(string $host, int $port): string {
+        return md5($host . ':' . $port);
+    }
 
-  private static function generateKey(string $host, int $port): string {
-    return md5($host . ':' . $port);
-  }
+    private function __construct(Config $config) {
+        $redis = Redis::New($config);
+        self::$pool[] = $redis->getDB();
+    }
 
-  private function __construct(Config $config) {
-    $redis = Redis::New($config);
-    self::$pool[] = $redis->getDB();
-  }
-
-  private function __clone() {
-  }
+    private function __clone() {
+    }
 }
 

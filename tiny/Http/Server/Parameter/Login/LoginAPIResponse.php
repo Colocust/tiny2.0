@@ -4,13 +4,12 @@
 namespace Tiny\Http\Login;
 
 
-
 use Tiny\Http\Response;
 
 class LoginAPIResponse extends Response {
-  /**
-   * @var string
-   * @uses \Tiny\Annotation\Uses\Required
-   */
-  public $token;
+    /**
+     * @var string
+     * @uses \Tiny\Annotation\Uses\Required
+     */
+    public $token;
 }

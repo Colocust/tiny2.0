@@ -6,37 +6,37 @@ namespace Tiny\Enum;
 
 class Enum {
 
-  protected $value_;
+    protected $value_;
 
-  private static $constants = [];
+    private static $constants = [];
 
-  public function getValue() {
-    return $this->value_;
-  }
-
-  public function __construct($value) {
-    $class = get_class($this);
-
-    $this->populateConstants();
-
-    $temp = self::$constants[$class];
-
-    if (!in_array($value, $temp, true)) {
-      throw new \Error("$value is not in enum " . $class);
+    public function getValue() {
+        return $this->value_;
     }
 
-    $this->value_ = $value;
-  }
+    public function __construct($value) {
+        $class = get_class($this);
 
+        $this->populateConstants();
 
-  private function populateConstants() {
-    if (array_key_exists(static::class, self::$constants)) {
-      return;
+        $temp = self::$constants[$class];
+
+        if (!in_array($value, $temp, true)) {
+            throw new \Error("$value is not in enum " . $class);
+        }
+
+        $this->value_ = $value;
     }
 
-    $instance = new \ReflectionClass(static::class);
-    $constants = $instance->getConstants();
 
-    self::$constants[static::class] = $constants;
-  }
+    private function populateConstants() {
+        if (array_key_exists(static::class, self::$constants)) {
+            return;
+        }
+
+        $instance = new \ReflectionClass(static::class);
+        $constants = $instance->getConstants();
+
+        self::$constants[static::class] = $constants;
+    }
 }

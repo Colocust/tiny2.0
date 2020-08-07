@@ -6,7 +6,7 @@ namespace Tiny\MongoDB\Op;
 
 class EqStrategy extends OpStrategy {
 
-  public function getValue() {
-    return $this->value_;
-  }
+    public function getValue() {
+        return $this->value_;
+    }
 }

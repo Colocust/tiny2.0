@@ -5,11 +5,11 @@ namespace Tiny\Algorithm\Linear;
 
 
 class LinkedListNode {
-  public $next;
-  public $element;
+    public $next;
+    public $element;
 
-  public function __construct($element, LinkedListNode $next = null) {
-    $this->element = $element;
-    $this->next = $next;
-  }
+    public function __construct($element, LinkedListNode $next = null) {
+        $this->element = $element;
+        $this->next = $next;
+    }
 }

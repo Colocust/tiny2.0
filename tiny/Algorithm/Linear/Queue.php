@@ -7,54 +7,54 @@ namespace Tiny\Algorithm\Linear;
 use Tiny\Exception\AlgorithmException;
 
 class Queue extends LinkedList {
-  /**
-   * @var $tail LinkedListNode
-   */
-  private $tail;
+    /**
+     * @var $tail LinkedListNode
+     */
+    private $tail;
 
-  public function __construct() {
-    $this->tail = null;
-    parent::__construct();
-  }
-
-  public function enQueue($element): void {
-    $this->size++;
-
-    if (is_null($this->tail)) {
-      $this->tail = new LinkedListNode($element);
-      $this->dummyHead->next = $this->tail;
-      return;
+    public function __construct() {
+        $this->tail = null;
+        parent::__construct();
     }
 
-    $this->tail->next = new LinkedListNode($element);
-    $this->tail = $this->tail->next;
-  }
+    public function enQueue($element): void {
+        $this->size++;
 
-  public function deQueue() {
-    if ($this->isEmpty()) {
-      throw new AlgorithmException('Queue is empty');
-    }
-    $this->size--;
+        if (is_null($this->tail)) {
+            $this->tail = new LinkedListNode($element);
+            $this->dummyHead->next = $this->tail;
+            return;
+        }
 
-    $next = $this->dummyHead->next;
-    $this->dummyHead->next = $next->next;
-
-    if (is_null($this->dummyHead->next)) {
-      $this->tail = null;
+        $this->tail->next = new LinkedListNode($element);
+        $this->tail = $this->tail->next;
     }
 
-    return $next->element;
-  }
+    public function deQueue() {
+        if ($this->isEmpty()) {
+            throw new AlgorithmException('Queue is empty');
+        }
+        $this->size--;
 
-  public function getFront() {
-    if ($this->isEmpty()) {
-      throw new AlgorithmException('Queue is empty');
+        $next = $this->dummyHead->next;
+        $this->dummyHead->next = $next->next;
+
+        if (is_null($this->dummyHead->next)) {
+            $this->tail = null;
+        }
+
+        return $next->element;
     }
-    return $this->get(0);
-  }
 
-  public function isEmpty(): bool {
-    return $this->size === 0;
-  }
+    public function getFront() {
+        if ($this->isEmpty()) {
+            throw new AlgorithmException('Queue is empty');
+        }
+        return $this->get(0);
+    }
+
+    public function isEmpty(): bool {
+        return $this->size === 0;
+    }
 
 }

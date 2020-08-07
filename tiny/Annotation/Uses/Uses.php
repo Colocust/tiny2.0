@@ -6,9 +6,9 @@ namespace Tiny\Annotation;
 
 interface Uses {
 
-  function isRequired(): bool;
+  public function isRequired(): bool;
 
-  function isOptional(): bool;
+  public function isOptional(): bool;
 
-  function getName(): string;
+  public function getName(): string;
 }

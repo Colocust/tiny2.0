@@ -1,12 +1,12 @@
 URL: API\TestLogin
 
 API\TestLoginRequest {
-   uid : string @Required
+    uid : string @Required
 } 
 
 API\TestLoginResponse {
-   result : int @Optional
-   token : string @Required
-   code : int @Required
+    result : int @Optional
+    token : string @Required
+    code : int @Required
 } 
 

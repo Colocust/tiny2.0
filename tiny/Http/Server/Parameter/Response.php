@@ -5,13 +5,13 @@ namespace Tiny\Http;
 
 
 class Response {
-  /**
-   * @var int
-   * @uses \Tiny\Annotation\Uses\Required
-   */
-  public $code;
+    /**
+     * @var int
+     * @uses \Tiny\Annotation\Uses\Required
+     */
+    public $code;
 
-  public function __construct(int $code = Code::SUCCESS) {
-    $this->code = $code;
-  }
+    public function __construct(int $code = Code::SUCCESS) {
+        $this->code = $code;
+    }
 }

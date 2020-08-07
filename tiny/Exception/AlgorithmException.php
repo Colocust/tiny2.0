@@ -7,7 +7,7 @@ use Throwable;
 use Tiny\API\HttpStatus;
 
 class AlgorithmException extends \Exception {
-  public function __construct($message, int $code = HttpStatus::FAILED, Throwable $previous = null) {
-    parent::__construct($message, $code, $previous);
-  }
+    public function __construct($message, int $code = HttpStatus::FAILED, Throwable $previous = null) {
+        parent::__construct($message, $code, $previous);
+    }
 }
