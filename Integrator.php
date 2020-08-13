@@ -5,12 +5,11 @@ namespace Tiny;
 
 use Tiny\Annotation\File;
 use Tiny\Http\API;
+use Tiny\Annotation\Property;
 
 require_once "tiny/Helper/Time.php";
 require_once "tiny/Loader/Loader.php";
 require_once "tiny/Annotation/File.php";
-
-use Tiny\Annotation\Property;
 
 Loader::register();
 
@@ -164,12 +163,13 @@ class __ClassLoader__ {
     }
 
     private function getPropertiesRules(API $api): array {
-        $stack[] = $api->responseClass();
-        $stack[] = $api->requestClass();
+        $stack = new \SplStack();
+        $stack->push($api->responseClass());
+        $stack->push($api->requestClass());
 
         $rules = [];
-        while (!empty($stack)) {
-            $reflectionClass = new \ReflectionClass(array_pop($stack));
+        while (!$stack->isEmpty()) {
+            $reflectionClass = new \ReflectionClass($stack->pop());
             $reflectionProperties = $reflectionClass->getProperties();
 
             $properties = [];
@@ -178,10 +178,10 @@ class __ClassLoader__ {
 
                 $type = $property->getType();
                 if ($type->isUserDefinedClass()) {
-                    $stack[] = $type->getTypeName();
+                    $stack->push($type->getTypeName());
                 }
                 if ($type->isArray() && $type->getElementType()->isUserDefinedClass()) {
-                    $stack[] = $type->getElementType()->getTypeName();
+                    $stack->push($type->getElementType()->getTypeName());
                 }
                 $properties[] = $property;
             }
