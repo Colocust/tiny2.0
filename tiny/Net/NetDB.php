@@ -4,7 +4,6 @@
 namespace Tiny\Net;
 
 use Tiny\Logger;
-use Tiny\Net\Config as NetConfig;
 use Tiny\Redis;
 use Tiny\Redis\Config;
 use Tiny\NetValue;
@@ -39,12 +38,11 @@ class NetDB extends Redis {
 
     public function __construct(string $net) {
         $this->net_ = $net;
-
-        parent::__construct(new Config(NetConfig::HOST
-            , NetConfig::PORT
-            , NetConfig::TIMEOUT
+        parent::__construct(new Config(config('redis.net.host')
+            , config('redis.net.port')
+            , config('redis.net.timeout')
         ));
-        $this->db->select(NetConfig::DB);
+        $this->db->select(config('redis.net.db'));
     }
 
     public function createNet($owner, int $ttl): void {

@@ -6,7 +6,6 @@ namespace Tiny\Cache;
 
 use Tiny\Redis;
 use Tiny\Redis\Config;
-use Tiny\Cache\Config as CacheConfig;
 
 
 /**
@@ -26,11 +25,11 @@ class CacheDB extends Redis {
     public function __construct(string $key) {
         $this->id = self::CACHE . $key;
 
-        parent::__construct(new Config(CacheConfig::HOST
-            , CacheConfig::PORT
-            , CacheConfig::TIMEOUT
+        parent::__construct(new Config(config('redis.net.host')
+            , config('redis.net.port')
+            , config('redis.net.timeout')
         ));
-        $this->db->select(CacheConfig::DB);
+        $this->db->select(config('redis.net.db'));
     }
 
     public function setex(int $ttl, string $value): void {
