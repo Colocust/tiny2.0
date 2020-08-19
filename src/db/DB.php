@@ -8,10 +8,10 @@ use Tiny\MongoDB\Model;
 
 abstract class DB extends Model {
     public function __construct() {
-        $config = new Config(config('mongodb.db.uri')
-            , config('mongodb.db.user')
-            , config('mongodb.db.password')
-            , config('mongodb.db.dbname'),
+        $config = new Config(\config('mongodb.db.uri')
+            , \config('mongodb.db.user')
+            , \config('mongodb.db.password')
+            , \config('mongodb.db.dbname'),
             $this->getCollection());
         parent::__construct($config);
     }

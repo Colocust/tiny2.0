@@ -3,6 +3,7 @@
 namespace Tiny;
 
 require_once 'tiny/Kernel/Loader.php';
+require_once "function.php";
 
 define('__ROOT__', __DIR__);
 define('PHP_EXT', 'php');

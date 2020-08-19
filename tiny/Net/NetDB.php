@@ -38,11 +38,11 @@ class NetDB extends Redis {
 
     public function __construct(string $net) {
         $this->net_ = $net;
-        parent::__construct(new Config(config('redis.net.host')
-            , config('redis.net.port')
-            , config('redis.net.timeout')
+        parent::__construct(new Config(\config('redis.net.host')
+            , \config('redis.net.port')
+            , \config('redis.net.timeout')
         ));
-        $this->db->select(config('redis.net.db'));
+        $this->db->select(\config('redis.net.db'));
     }
 
     public function createNet($owner, int $ttl): void {

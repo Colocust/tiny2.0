@@ -9,6 +9,7 @@ use MongoDB\Driver\Cursor;
 use MongoDB\Driver\Exception\BulkWriteException;
 use MongoDB\Driver\Query;
 use Tiny\Converter;
+use Tiny\Exception\ConverterException;
 use Tiny\Logger;
 
 abstract class Model {
@@ -80,19 +81,17 @@ abstract class Model {
     }
 
     protected function insert(Info $info): bool {
-        $document = Converter::toStdClass($info);
+        try {
+            $document = Converter::toStdClass($info);
+        } catch (ConverterException $e) {
+            throw new \Exception($e->getMessage());
+        }
 
         $bulk = new BulkWrite();
         $bulk->insert($document);
-        try {
-            $this->db_->getManager()->executeBulkWrite($this->db_->getNs(), $bulk);
-            return true;
-        } catch (BulkWriteException $e) {
-            Logger::getInstance()->warn("executeBulkWrite BulkWriteException" . $e);
-        } catch (\Exception $e) {
-            Logger::getInstance()->error("executeBulkWrite" . $e);
-        }
-        return false;
+        $this->db_->getManager()->executeBulkWrite($this->db_->getNs(), $bulk);
+
+        return true;
     }
 
     public static function newObjectId(): string {
