@@ -4,6 +4,6 @@
 namespace Tiny;
 
 
-interface OperationConfig {
+class RedisSentinel {
 
 }
