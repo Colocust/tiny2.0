@@ -41,9 +41,11 @@ class RedisSentinel {
 
         foreach ($uri as $sentinel) {
             $redis = new \Redis();
-            if ($redis->connect($sentinel['host'], $sentinel['port'])) {
+            try {
+                $redis->pconnect($sentinel['host'], $sentinel['port']);
                 $this->sentinel_ = $redis;
-                break;
+            } catch (\RedisException $e) {
+                Logger::getInstance()->error($sentinel['host'] . ':' . $sentinel['port'] . ' can not connect ', $e);
             }
         }
 

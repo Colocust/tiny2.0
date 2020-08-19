@@ -14,7 +14,7 @@ class Config {
             if (isset($config[$str])) {
                 $config = $config[$str];
             } else {
-                throw new \Exception('wrong config name' . $str);
+                throw new \Exception('wrong config name ' . $str);
             }
         }
         return $config;
