@@ -1,10 +1,13 @@
 <?php declare(strict_types=1);
 
+use Tiny\Config;
+use Tiny\Container;
 use Tiny\Loader;
 use Tiny\Main;
 use Tiny\Task;
 
 define('__ROOT__', __DIR__);
+define('PHP_EXT', 'php');
 
 class Server {
 
@@ -36,9 +39,9 @@ class Server {
             $main->swooleGo($request, $response);
         });
         $server->on('WorkerStart', function ($server, $worker_id) {
-            include_once __ROOT__ . '/tiny/Loader/Loader.php';
-            include_once __ROOT__ . '/Config.php';
+            include_once __ROOT__ . '/tiny/Kernel/Loader.php';
             Loader::register();
+            Container::getInstance()->get(Config::class)->load();
         });
         $server->on('message', [$this, 'onMessage']);
         $server->on('open', [$this, 'onOpen']);

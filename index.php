@@ -2,12 +2,13 @@
 
 namespace Tiny;
 
-require_once 'tiny/Loader/Loader.php';
-require_once 'Config.php';
+require_once 'tiny/Kernel/Loader.php';
 
 define('__ROOT__', __DIR__);
+define('PHP_EXT', 'php');
 
 Loader::register();
+Container::getInstance()->get(Config::class)->load();
 $main = new Main();
 $main->fpmGo();
 

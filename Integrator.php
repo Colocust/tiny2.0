@@ -8,10 +8,8 @@ use Tiny\Http\API;
 use Tiny\Annotation\Property;
 
 require_once "tiny/Helper/Time.php";
-require_once "tiny/Loader/Loader.php";
+require_once "tiny/Kernel/Loader.php";
 require_once "tiny/Annotation/File.php";
-
-Loader::register();
 
 define('__ROOT__', __DIR__);
 define('PHP_EXT', 'php');
@@ -39,6 +37,8 @@ class __ClassLoader__ {
     public static $classMap = ' . $classMap . ';
 }';
         fwrite($file, $content);
+
+        Loader::register();
 
         //第二步 生成接口文档
         mkdir('doc');
@@ -195,6 +195,3 @@ class __ClassLoader__ {
 
 $integrator = new Integrator();
 $integrator->go();
-
-
-
