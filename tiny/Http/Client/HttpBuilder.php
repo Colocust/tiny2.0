@@ -28,7 +28,7 @@ class HttpBuilder {
         return $this->url_;
     }
 
-    public function getContent(): string {
+    public function getContent(): ?string {
         return $this->content_;
     }
 

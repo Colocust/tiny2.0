@@ -26,18 +26,11 @@ class CurlGetHttp implements CurlHttp {
             curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
         }
 
-        $data = $this->builder_->getContent();
-
-        if ($data === "" | $data === null) {
-            Logger::getInstance()->error(
-                "curl get error! url is " . $this->builder_->getUrl()
-                . ", and requestData is empty");
-
-            curl_close($curl);
-            return null;
+        $value = $this->builder_->getUrl();
+        if ($this->builder_->getContent()) {
+            $value .= '?' . $this->builder_->getContent();
         }
-
-        curl_setopt($curl, CURLOPT_URL, $this->builder_->getUrl() . '?' . $data);
+        curl_setopt($curl, CURLOPT_URL, $value);
 
         $res = curl_exec($curl);
         $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
