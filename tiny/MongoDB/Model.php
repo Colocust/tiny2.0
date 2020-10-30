@@ -23,7 +23,7 @@ abstract class Model {
 
     protected function find(Filter $filter, ?QueryOptions $queryOptions = null): Cursor {
         return $this->db_->getManager()->executeQuery($this->db_->getNs(),
-            new Query($filter->getFilter(), $queryOptions->getQueryOptions() ?? []));
+            new Query($filter->getFilter(), $queryOptions ? $queryOptions->getQueryOptions() : []));
     }
 
     protected function update(Filter $filter, NewObject $newObject): bool {
